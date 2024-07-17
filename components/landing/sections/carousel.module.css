@@ -1,0 +1,7 @@
+/* styles/Bootstrap.module.css */
+.carouselImage {
+    width: 100%;
+    height: 80lvh;
+    object-fit: cover; /* Ensures the image covers the area, preserving aspect ratio */
+  }
+  
