@@ -13,6 +13,7 @@ import { Textarea } from '../ui/textarea';
 import { FormErorr } from '../form-error';
 import { FormSuccess } from '../form-success';
 import { Button } from '@/components/ui/button';
+import { submitEnquiry } from '@/actions/contact';
 const ContactFrom = () => {
   const [error, setError] = useState<string>('');
   const [success, setSuccess] = useState<string | boolean>('');
@@ -28,7 +29,17 @@ const ContactFrom = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof contactFormSchema>) => {
-    console.log(values)
+    try {
+      const response = await submitEnquiry(values);
+        if(response.error) setError(response.error);
+
+        if(response.success) {
+          setSuccess(response.success);
+          form.reset();
+        }
+    } catch (error) {
+      setError('कुनै समस्या देखा परेको छ। कृपया पुन: प्रयास गर्नुहोस्।');
+    }
   }
 
   return (

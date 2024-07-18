@@ -1,3 +1,7 @@
+import { RestPasswordTemplate } from '@/constant/rest-template';
+import { SocketAddress } from 'net';
+import { serverHooks } from 'next/dist/server/app-render/entry-base';
+import { Port_Lligat_Sans } from 'next/font/google';
 import * as z from 'zod';
 
 export const LoginSchema = z.object({
@@ -44,4 +48,26 @@ export const contactFormSchema = z.object({
   message: z.string()
     .min(1, { message: "Message is required" })
     .max(1000, { message: "Message can't exceed 1000 characters" }),
+});
+
+
+
+export const smtpFormSchema = z.object({
+  username: z.string().min(1, 'Username is required'),
+  password: z.string().min(1, 'Password is required'),
+  servername: z.string().min(1, 'Servername is required'),
+  displayname: z.string().min(1, 'Displayname is required'),
+  port: z.number().positive('Port must be a positive number'),
+  fromEmail: z.string().email('Invalid email format for fromEmail'),
+  toEmail: z.string().email('Invalid email format for toEmail').optional(),
+});
+
+
+export const changePasswordSchema = z.object({
+  currentPassword: z.string().min(1, "Current password is required"),
+  newPassword: z.string().min(8, "New password must be at least 8 characters long"),
+  confirmPassword: z.string().min(8, "Confirm password must be at least 8 characters long"),
+}).refine(data => data.newPassword === data.confirmPassword, {
+  message: "New password and confirm password must match",
+  path: ["confirmPassword"],
 });

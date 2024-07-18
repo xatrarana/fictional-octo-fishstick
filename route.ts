@@ -8,7 +8,12 @@ export const publicRoutes = [
     "/auth/forgot",
     "/auth/verify",
     "/auth/account/reset",
-    "/contact"
+    "/contact",
+
+
+    // "/admin/dashboard",
+    // "/admin/smtp",
+    // "/api/config/smtp",
 ]
 
 /**
@@ -29,4 +34,4 @@ export const authRoutes = [
 export const apiAuthPrefix = "/api/auth"
 
 
-export const DEFAULT_LOGIN_REDIRECT_URL = "/"
+export const DEFAULT_LOGIN_REDIRECT_URL = "/admin/dashboard"

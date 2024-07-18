@@ -31,3 +31,40 @@ model VerificationToken {
   expires DateTime
   @@unique([email, token])
 }
+
+
+model Smtp {
+  id        String   @id @default(cuid())
+  servername String
+  port       Int
+  fromEmail   String
+  username   String
+  password   String
+  displayname String
+  toEmail    String?
+
+  @@unique([username])
+  @@index([username])
+}
+
+
+model Banner {
+  id        String @id @default(cuid())
+  title     String
+  imageUrl  String
+  slug      String @unique
+  createdAt DateTime @default(now())
+}
+
+model Enquiry {
+  id        String   @id @default(cuid())
+  name      String   @db.VarChar(100)
+  email     String   @db.VarChar(255)
+  subject   String   @db.VarChar(150)
+  message   String   @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([email])
+}
+

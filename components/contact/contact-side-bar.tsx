@@ -29,16 +29,16 @@ export function ContactSideBar({ className, ...props }: ContactSidebarProps) {
               <BiSolidMapPin className="h-8 w-8  text-green-700"/>
             </div>
             <div className="data px-3">
-              <h3 className="font-semibold mb-2 text-slate-800">ठेगाना</h3>
+              <h3 className="font-semibold mb-2 text-sm  text-slate-800">ठेगाना</h3>
               <p className=" text-muted-foreground">{"Kalanki-31, Kathmandu, Lalitpur"}</p>
             </div>
           </div>
-          <div className="flex items-center   rounded-md h-20 p-5">
+          <div className="flex items-center  rounded-md h-20 p-5">
             <div className="flex items-center justify-center">
               <BiSolidPhone className="h-8 w-8 text-green-700"/>
             </div>
             <div className="data px-3">
-              <h3 className="font-semibold mb-2 text-slate-800">फोन नम्बरहरु</h3>
+              <h3 className="font-semibold mb-2 text-sm text-slate-800">फोन नम्बरहरु</h3>
               <p className=" text-muted-foreground">{"9866615358"}</p>
             </div>
           </div>
@@ -47,7 +47,7 @@ export function ContactSideBar({ className, ...props }: ContactSidebarProps) {
               <BiSolidEnvelopeOpen className="h-8 w-8 text-green-700"/>
             </div>
             <div className="data px-3">
-              <h3 className="font-semibold mb-2 text-slate-800">इमेल</h3>
+              <h3 className="font-semibold mb-2 text-sm text-slate-800">इमेल</h3>
               <p className=" text-muted-foreground">{"info@trijyoti.coop.np"}</p>
             </div>
           </div>
