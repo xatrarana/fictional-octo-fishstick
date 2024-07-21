@@ -31,7 +31,7 @@ function NewVerificationForm() {
               }
       
       }).catch(error => setError("Something went wrong!") );
-    },[token,success,error])
+    },[token,success,error,router])
 
     useEffect(() => {onSubmit();},[onSubmit])
   return (

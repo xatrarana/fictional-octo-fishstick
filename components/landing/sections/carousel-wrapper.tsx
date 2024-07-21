@@ -34,6 +34,7 @@ export default function CarouselWrapper() {
         <Carousel activeIndex={index} onSelect={handleSelect}>
           {bootstrapItems && bootstrapItems.length > 0 && bootstrapItems.map((item) => (
             <Carousel.Item key={item.id} interval={4000}>
+              { /* eslint-disable-next-line padded-blocks */}
               <img src={item.imageUrl} className={'rounded-md h-[80lvh] w-full object-cover'} alt="slides" />
               <Carousel.Caption >
                 <h3>{item.title}</h3>

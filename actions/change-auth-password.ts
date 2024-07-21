@@ -1,6 +1,5 @@
 "use server";
 import { auth } from '@/auth';
-import { seedData } from '@/data/seed';
 import { db } from '@/lib/db';
 import { hashPassword } from '@/lib/utils';
 import { changePasswordSchema } from '@/schemas';

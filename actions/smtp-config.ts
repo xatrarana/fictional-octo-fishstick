@@ -33,8 +33,8 @@ export async function smtpSave(values:z.infer<typeof smtpFormSchema>) {
 
         return { success: "SMTP Configured Successfully" }
     } catch (error) {
-        if(error instanceof z.ZodError) throw new Error(error.message);
-        throw new Error("Something went wrong");
+        if(error instanceof z.ZodError) return {error: error.message};
+        return {error:"Something went wrong while saving credentials."}
     }
 }
 

@@ -1,5 +1,4 @@
 import { ForgotForm } from '@/components/auth/forgot-form'
-import { seedData } from '@/data/seed'
 import React, { Suspense } from 'react'
 
 const ForgotPage = () => {

@@ -36,7 +36,7 @@ const SMTPForm = () => {
         const response = await instance.get('/api/config/smtp');
         setSmtpConfig(response.data.smtp);
     } catch (error) {
-      setError("Something went wrong");
+      setError("Something went wrong!!");
         
     }
   }

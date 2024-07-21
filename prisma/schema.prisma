@@ -18,12 +18,21 @@ model User {
   name           String?
   username       String?          @unique
   email          String           @unique
-  emailVerified  DateTime?
   passwordHash   String?
   image          String?
+  roleId         Int
+  Role           Role             @relation(fields: [roleId],references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+model Role {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  users User[]
+}
+
+
 model VerificationToken {
   id      String   @id @default(cuid())
   email   String
@@ -64,7 +73,5 @@ model Enquiry {
   message   String   @db.Text
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  @@unique([email])
 }
 

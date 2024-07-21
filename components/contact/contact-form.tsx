@@ -38,6 +38,7 @@ const ContactFrom = () => {
           form.reset();
         }
     } catch (error) {
+      console.error(error)
       setError('कुनै समस्या देखा परेको छ। कृपया पुन: प्रयास गर्नुहोस्।');
     }
   }
