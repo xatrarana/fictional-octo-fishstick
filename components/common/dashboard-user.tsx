@@ -76,7 +76,7 @@ const DropdownUser = () => {
         ref={dropdown}
         onFocus={() => setDropdownOpen(true)}
         onBlur={() => setDropdownOpen(false)}
-        className={`absolute right-7 md:right-0 mt-4 flex w-52 md:w-62.5 flex-col rounded-md border border-stroke bg-slate-100 shadow-default dark:border-strokedark dark:bg-boxdark ${
+        className={`absolute right-7 md:right-0 mt-4 z-[100000] flex w-52 md:w-62.5 flex-col rounded-md border border-stroke bg-slate-100 shadow-default dark:border-strokedark dark:bg-boxdark ${
           dropdownOpen === true ? "block" : "hidden"
         }`}
       >

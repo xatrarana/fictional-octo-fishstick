@@ -1,14 +1,14 @@
-import { PrismaClient } from '@prisma/client';
+import {PrismaClient} from '@prisma/client';
 import bcrypt from 'bcryptjs';
 
-const prisma = new PrismaClient();
+const client = new PrismaClient();
 
 async function main() {
   const roles = ['admin', 'user'];
 
   const upsertedRoles = await Promise.all(
     roles.map(role =>
-      prisma.role.upsert({
+      client.role.upsert({
         where: { name: role },
         update: {},
         create: { name: role },
@@ -18,7 +18,7 @@ async function main() {
 
   const adminRole = upsertedRoles.find(role => role.name === 'admin');
   if (adminRole) {
-    const adminUser = await prisma.user.upsert({
+    const adminUser = await client.user.upsert({
       where: { email: 'dev.chhatrarana@gmail.com' },
       update: {},
       create: {
@@ -35,6 +35,21 @@ async function main() {
   } else {
     console.error('Admin role not found');
   }
+
+
+  const smtp = await client.smtp.upsert({
+    where: {username:'atdevaiz@gmail.com'},
+    update:{},
+    create: {
+      servername:'smtp.gmail.com',
+      port:465,
+      username:'atdevaiz@gmail.com',
+      password:'ywddgupyqevinfqc',
+      fromEmail:'atdevaiz@gmail.com',
+      toEmail:'dev.chhatrarana@gmail.com',
+      displayname:'Trijyoti Credits & Cooperative Ltd.',
+    }
+  })
 }
 
 main()
@@ -43,5 +58,5 @@ main()
     process.exit(1);
   })
   .finally(async () => {
-    await prisma.$disconnect();
+    await client.$disconnect();
   });

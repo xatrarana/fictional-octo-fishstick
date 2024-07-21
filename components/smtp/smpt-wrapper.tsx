@@ -8,6 +8,8 @@ import {
     CardHeader,
     CardTitle,
   } from "@/components/ui/card"
+import { Button } from '../ui/button'
+import SmtpTestContianer from './smtp-test'
 const SmtpWrapper = () => {
   return (
     <Card className='w-full'>
@@ -15,6 +17,9 @@ const SmtpWrapper = () => {
       <CardTitle>{"SMTP Configuration"}</CardTitle>
     </CardHeader>
     <CardContent>
+      <div className='flex justify-end'>
+        <SmtpTestContianer/>
+      </div>
      <SMTPForm/>
     </CardContent>
    

@@ -2,6 +2,7 @@ import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 import bcrypt from 'bcryptjs'
 
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
@@ -22,3 +23,14 @@ export const hashPassword = async (password: string) => {
   const saltRound = await bcrypt.genSalt(10);
   return await bcrypt.hash(password,saltRound)
 }
+
+
+export const generateSlug = (title: string): string => {
+  return title
+    .toLowerCase()               
+    .replace(/\s+/g, '-')        
+    .replace(/[^\w\-]+/g, '')    
+    .replace(/--+/g, '-')        
+    .replace(/^-+|-+$/g, '');   
+  };
+

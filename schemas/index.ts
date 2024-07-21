@@ -71,3 +71,8 @@ export const changePasswordSchema = z.object({
   message: "New password and confirm password must match",
   path: ["confirmPassword"],
 });
+
+export const bannerSchema = z.object({
+  title: z.string().min(1, "Title is required"),
+  imageUrl: z.string().optional(),
+});

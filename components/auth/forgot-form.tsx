@@ -49,7 +49,7 @@ export const ForgotForm = () => {
                 }
                 if (data && data.success) {
                     setSuccess(data.success);
-                    setRemainingTime(60); // 1 minute countdown
+                    setRemainingTime(60);
                 }
             });
         });

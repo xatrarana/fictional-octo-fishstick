@@ -20,13 +20,14 @@ const Footer = () => {
 
   return (
     <footer className="flex  flex-col bg-green-800 pt-4">
-      <div className='footer grid  gap-3  md:lg:grid-cols-6 w-full max-w-7xl mx-auto p-2  md:p-5'>
-        <div className='col-span-2'>
+      <div className='footer grid  gap-3 grid-cols-1  md:grid-cols-2 lg:grid-cols-6 w-full max-w-7xl mx-auto p-2  md:p-5'>
+
+        <div className='md:col-span-2 lg:col-span-2'>
           <Link href={'/'} className='flex items-center no-underline gap-x-3 w-full '>
             {
               <Image width={70} height={70} className='bg-blend-screen' src={samll} alt={"data.companyName"} />
             }
-            <h1 className='text-white  lg:font-semibold lg:text-2xl text-xl'>{"Trijyoti Saving and Credit Co-operative Ltd."}</h1>
+            <h3 className='text-white text-md  lg:font-semibold lg:text-2xl md:text-xl'>{"Trijyoti Saving and Credit Co-operative Ltd."}</h3>
           </Link>
 
           <div className='text-sm font-normal text-md flex flex-col gap-y-3 text-white mt-4'>
@@ -36,7 +37,8 @@ const Footer = () => {
           </div>
 
         </div>
-        <div className='flex flex-col gap-y-2 col-span-1'>
+
+        <div className='flex flex-col gap-y-2 md:lg:col-span-1'>
           <h5 className="footer-title text-gray-100 text-md font-semibold">उपयोगी लिङ्कहरू</h5>
           {
             useFulLinks.map((nav) => {
@@ -47,7 +49,7 @@ const Footer = () => {
           }
         </div>
 
-        <div className='flex flex-col gap-y-2 col-span-1'>
+        <div className='flex flex-col gap-y-2 md:lg:col-span-1'>
           <h5 className="footer-title text-gray-100 font-semibold text-md">अरू लिङ्कहरू</h5>
           {
             otherLinks.map((nav) => {
@@ -57,7 +59,8 @@ const Footer = () => {
             })
           }
         </div>
-        <div className='col-span-1'>
+
+        <div className='md:lg:col-span-1'>
           <h5 className="footer-title text-gray-100 font-semibold text-md">सामाजिक लिङ्कहरू</h5>
           {
             <div className="flex items-center gap-5 mt-4">
@@ -90,10 +93,11 @@ const Footer = () => {
 
         </div>
 
-        <div className='flex items-center justify-center flex-col col-span-1'>
+        <div className='flex items-center justify-center flex-col md:lg:col-span-1'>
           <span className='font-bold text-lg text-white '> Scan to Pay</span>
           <Image priority src={require("@/public/logo/qr.webp") as string} className='h-auto w-auto' alt='scan to pay' height={100} width={100} />
         </div>
+
       </div>
       <aside className='w-full flex flex-col md:lg:flex-row items-center mt-5 mb-3 justify-center gap-3'>
 
