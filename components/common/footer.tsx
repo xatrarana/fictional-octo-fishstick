@@ -4,6 +4,7 @@ import Image from 'next/image';
 import AI from '@/public/logo/AI.png'
 import { BiSolidEnvelopeOpen, BiSolidPhoneCall, BiSolidMapPin, BiLogoFacebook, BiLogoWhatsapp, BiLogoTwitter } from "react-icons/bi";
 import samll from "@/public/logo/small.webp"
+import qr from "@/public/logo/qr.webp"
 import { otherLinks, useFulLinks } from '@/constant/nav-components';
 import {
   Tooltip,
@@ -12,10 +13,8 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 
-
-
-
 const date = new Date()
+
 const Footer = () => {
 
   return (
@@ -39,7 +38,7 @@ const Footer = () => {
         </div>
 
         <div className='flex flex-col gap-y-2 md:lg:col-span-1'>
-          <h5 className="footer-title text-gray-100 text-md font-semibold">उपयोगी लिङ्कहरू</h5>
+          <h5 className=" text-white text-md md:lg:text-lg  font-semibold">उपयोगी लिङ्कहरू</h5>
           {
             useFulLinks.map((nav) => {
               return (
@@ -50,7 +49,7 @@ const Footer = () => {
         </div>
 
         <div className='flex flex-col gap-y-2 md:lg:col-span-1'>
-          <h5 className="footer-title text-gray-100 font-semibold text-md">अरू लिङ्कहरू</h5>
+          <h5 className="text-white md:lg:text-lg font-semibold text-md">अरू लिङ्कहरू</h5>
           {
             otherLinks.map((nav) => {
               return (
@@ -61,7 +60,7 @@ const Footer = () => {
         </div>
 
         <div className='md:lg:col-span-1'>
-          <h5 className="footer-title text-gray-100 font-semibold text-md">सामाजिक लिङ्कहरू</h5>
+          <h5 className="text-white md:lg:text-lg font-semibold text-md">सामाजिक लिङ्कहरू</h5>
           {
             <div className="flex items-center gap-5 mt-4">
               {
@@ -95,7 +94,7 @@ const Footer = () => {
 
         <div className='flex items-center justify-center flex-col md:lg:col-span-1'>
           <span className='font-bold text-lg text-white '> Scan to Pay</span>
-          <Image priority src={require("@/public/logo/qr.webp") as string} className='h-auto w-auto' alt='scan to pay' height={100} width={100} />
+          <Image priority src={qr} className='h-auto w-auto' alt='scan to pay' height={100} width={100} />
         </div>
 
       </div>

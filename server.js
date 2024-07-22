@@ -1,13 +1,22 @@
 const { createServer } = require('http')
+const dotenv = require('dotenv')
 const { parse } = require('url')
 const next = require('next')
 const fs = require('fs');
 const path = require('path')
+
+dotenv.config()
  
-console.log('process.env.NODE_ENV', process.env.NODE_ENV)
+console.log('process.env.AUTH_SECRET', process.env.AUTH_SECRET)
+console.log('process.env.PORT', process.env.PORT)
+console.log('process.env.DATABASE_URL', process.env.DATABASE_URL)
+console.log('process.env.AUTH_TRUST_HOST', process.env.AUTH_TRUST_HOST)
+console.log('process.env.NEXT_PUBLIC_URL', process.env.NEXT_PUBLIC_URL)
+
+
 const dev = process.env.NODE_ENV !== 'production'
 const hostname = 'localhost'
-const port = 3000
+const port = process.env.PORT || 3000
 // when using middleware `hostname` and `port` must be provided below
 const app = next({ dev, hostname, port })
 const handle = app.getRequestHandler()

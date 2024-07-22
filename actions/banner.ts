@@ -15,3 +15,13 @@ export const deleteBanner = async (id: string) => {
 
     return {success: true,message: 'Slider deleted successfully'}
 }
+
+
+export const getBanners = async () => {
+    try {
+        const sliders = await db.banner.findMany()
+        return sliders;
+    } catch (error) {
+        return null;
+    }
+}

@@ -12,6 +12,7 @@ import { FormSuccess } from "@/components/form-success";
 import { login } from "@/actions/login";
 import { useState, useTransition } from "react";
 import { useSearchParams } from "next/navigation";
+import LoadingSpinner from "@/constant/loading-spinner";
 
 export const LoginForm = () => {
     const searchParams = useSearchParams();
@@ -30,7 +31,7 @@ export const LoginForm = () => {
     const onSubmit = (values: z.infer<typeof LoginSchema>) => {
         setError("");
         setSuccess("");
-        startTransition(() => {
+        startTransition(async() => {
             login(values).
             then((data) => { 
                 if(data && data.error){
@@ -41,6 +42,7 @@ export const LoginForm = () => {
                 }
                
             })
+
         })
     }
     return <CardWrapper showHeader headerLabel="Welcome back" backButtonLabel="Forgot Password?" backButtonHref="/auth/forgot">
@@ -89,7 +91,6 @@ export const LoginForm = () => {
 
                     <FormErorr message={error || urlError}/>
                     <FormSuccess message={success}/>
-
                     <Button
                     type="submit"
                     className="w-full bg-green-800 hover:bg-green-700"
@@ -97,7 +98,7 @@ export const LoginForm = () => {
                     size={"lg"}
                     >
                         {
-                            isPending ? <span className="loading loading-dots loading-md"></span> : "Login"
+                            isPending ? <LoadingSpinner/> : "Login"
                         }
                     </Button>
             </form>

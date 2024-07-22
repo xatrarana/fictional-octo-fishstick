@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { Carousel } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Image from "next/image";
 
 type CarouselWrapperProps = {
 
@@ -33,9 +34,9 @@ export default function CarouselWrapper() {
       {bootstrapItems && bootstrapItems.length > 0 && (
         <Carousel activeIndex={index} onSelect={handleSelect}>
           {bootstrapItems && bootstrapItems.length > 0 && bootstrapItems.map((item) => (
-            <Carousel.Item key={item.id} interval={4000}>
+            <Carousel.Item className="h-[80lvh]" key={item.id} interval={4000}>
               { /* eslint-disable-next-line padded-blocks */}
-              <img src={item.imageUrl} className={'rounded-md h-[80lvh] w-full object-cover'} alt="slides" />
+              <Image src={item.imageUrl} width={100} height={100} className={'rounded-md h-full  w-full object-cover'} alt="slides" />
               <Carousel.Caption >
                 <h3>{item.title}</h3>
               </Carousel.Caption>

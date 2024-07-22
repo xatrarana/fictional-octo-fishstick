@@ -43,7 +43,7 @@ const BannerItems = () => {
   const [error, setError] = useState<string | null>(null);
 
 
-  const fetchSliders = async (page: number, limit: number) => {
+  const fetchSliders = async (page?: number, limit?: number) => {
     setIsLoading(true);
     setError(null);
     try {
@@ -67,6 +67,7 @@ const BannerItems = () => {
     try {
       const response = await deleteBanner(id)
       if(response.success){
+        fetchSliders(currentPage, ITEMS_PER_PAGE);
         toast({
           title: 'Banner Info',
           description: response.message,

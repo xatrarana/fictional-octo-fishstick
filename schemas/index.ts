@@ -76,3 +76,12 @@ export const bannerSchema = z.object({
   title: z.string().min(1, "Title is required"),
   imageUrl: z.string().optional(),
 });
+
+
+
+export const aboutSchema = z.object({
+  title: z.string(),
+  content: z.string(),
+  mission: z.string().optional(),
+  vission: z.string().optional(),
+});
