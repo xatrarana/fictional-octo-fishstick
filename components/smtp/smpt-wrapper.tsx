@@ -1,5 +1,4 @@
-import React from 'react'
-import SMTPForm from './smtp-form'
+import React, { Suspense } from 'react'
 import {
     Card,
     CardContent,
@@ -8,8 +7,9 @@ import {
     CardHeader,
     CardTitle,
   } from "@/components/ui/card"
-import { Button } from '../ui/button'
 import SmtpTestContianer from './smtp-test'
+
+const SmtpFormLazy = React.lazy(() => import('./smtp-form'))
 const SmtpWrapper = () => {
   return (
     <Card className='w-full'>
@@ -17,10 +17,12 @@ const SmtpWrapper = () => {
       <CardTitle>{"SMTP Configuration"}</CardTitle>
     </CardHeader>
     <CardContent>
-      <div className='flex justify-end'>
+      <div className='flex justify-end my-2'>
         <SmtpTestContianer/>
       </div>
-     <SMTPForm/>
+      <Suspense fallback={<div>Loading...</div>}>
+        <SmtpFormLazy/>
+      </Suspense>
     </CardContent>
    
   </Card>

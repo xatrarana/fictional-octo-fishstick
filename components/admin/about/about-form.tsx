@@ -16,46 +16,53 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import dynamic from "next/dynamic";
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import { Editor } from "@tinymce/tinymce-react";
+import { updateAbout } from "@/actions/about";
+import { useToast } from "@/components/ui/use-toast";
+
+
+const Editor = dynamic(() => import("./editor"), { ssr: false });
 
 type AboutFormProps = {
   data: About | null;
 };
 const AboutForm: React.FC<AboutFormProps> = ({ data }) => {
-    const contentRef = useRef<Editor | null>(null);
-    const missionRef = useRef<Editor | null>(null);
-  const [success, setForm] = React.useState<string | undefined>(undefined);
-  const [error, setError] = React.useState<string | undefined>(undefined);
+  const {toast} = useToast()
   const form = useForm<z.infer<typeof aboutSchema>>({
     resolver: zodResolver(aboutSchema),
     defaultValues: {
-      title: "",
-      content: "",
-      mission: "",
-      vission: "",
+      title: data?.title ?? "",
+      content: data?.content ?? "",
+      mission: data?.mission ?? "",
+      vission: data?.vission ?? "",
     },
   });
 
-  if (data) {
-    form.reset(data);
-  }
+  
 
-  useEffect(() =>{
-    if(data){
-        //@ts-ignore
-        contentRef.current.setContent(data?.content || '');
-    }
+  const onSubmit = async (data: z.infer<typeof aboutSchema>) => {
+      try {
+       const response =  await updateAbout(data);
 
-    if(contentRef.current){
-        //@ts-ignore
-        form.setValue('content', contentRef.current.getContent());
-    }
-  } ,[contentRef, missionRef]);
+       if(!!response.success){
+        toast({
+          title: "About Action",
+          description: response.success,
+        })
+       }
 
-  const onSubmit = (data: z.infer<typeof aboutSchema>) => {
+       if(!!response.error){
+        toast({
+          title: "About Error",
+          description: response.error,
+        })
+       }
 
-    console.log(data);
+      } catch (error) {
+        toast({
+          title: "About Error",
+          description: "An error occured",
+        })
+      }    
   };
 
   return (
@@ -81,30 +88,58 @@ const AboutForm: React.FC<AboutFormProps> = ({ data }) => {
             <FormField
               name="content"
               control={form.control}
-              render={({ field }) => (
+              render={({ field:{onChange} }) => (
                 <FormItem>
                   <FormLabel>Content</FormLabel>
                   <FormControl>
                     <Editor
-                      apiKey="5ufnn6gw2zkk2cznypfqjx3cdowlv1pcbgxx9y7p8yee4ixn"
-                      onInit={(evt, editor) => ((contentRef.current as any) = editor)}
-                      init={{
-                        plugins:
-                          "anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss markdown",
-                        toolbar:
-                          "undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat",
-                        tinycomments_mode: "embedded",
-                        tinycomments_author: "Author name",
-                        mergetags_list: [
-                          { value: "First.Name", title: "First Name" },
-                          { value: "Email", title: "Email" },
-                        ],
-                        ai_request: (request: any, respondWith: any) =>
-                          respondWith.string(() =>
-                            Promise.reject("See docs to implement AI Assistant")
-                          ),
-                      }}
-                      initialValue="Welcome to TinyMCE!"
+                      onChange={onChange}
+                      name="content"
+                      id="content"
+                      key={data?.id}
+                      initialContent={data?.content}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+          <div className="space-y-4">
+            <FormField
+              name="vission"
+              control={form.control}
+              render={({ field:{onChange} }) => (
+                <FormItem>
+                  <FormLabel>Vision</FormLabel>
+                  <FormControl>
+                  <Editor
+                      onChange={onChange}
+                      name="vission"
+                      id="vission"
+                      key={data?.id}
+                      initialContent={data?.vission}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+          <div className="space-y-4">
+            <FormField
+              name="mission"
+              control={form.control}
+              render={({ field:{onChange} }) => (
+                <FormItem>
+                  <FormLabel>Mission</FormLabel>
+                  <FormControl>
+                  <Editor
+                      onChange={onChange}
+                      name="mission"
+                      id="mission"
+                      key={data?.id}
+                      initialContent={data?.mission}
                     />
                   </FormControl>
                   <FormMessage />
@@ -114,7 +149,7 @@ const AboutForm: React.FC<AboutFormProps> = ({ data }) => {
           </div>
 
           <div>
-            <Button type="submit">Save</Button>
+            <Button className="w-full bg-green-800 hover:bg-green-700" type="submit">Save Details</Button>
           </div>
         </form>
       </Form>

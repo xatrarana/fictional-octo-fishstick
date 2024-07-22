@@ -19,8 +19,12 @@ import {
   BiSolidBuilding,
   BiSolidFile,
   BiSolidImage,
+  BiGridSmall,
+  BiCollapse,
+  BiSolidNews,
 } from "react-icons/bi";
 import { signOut } from "next-auth/react";
+import { Button } from "../ui/button";
 
 interface SidebarProps {
   sidebarOpen: boolean;
@@ -81,6 +85,19 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
       }`}
     >
       <div className="no-scrollbar flex flex-col overflow-y-auto duration-300 ease-linear">
+        <div className="p-1 flex items-center justify-end">
+        <Button
+            aria-controls="sidebar"
+            onClick={(e) => {
+              e.stopPropagation();
+              setSidebarOpen(!sidebarOpen);
+            }}
+            className="z-50 block rounded-md border border-stroke hover:bg-green-700 bg-green-800 p-1.5  shadow-sm dark:border-strokedark dark:bg-boxdark lg:hidden"
+          >
+           
+            <BiCollapse className="block h-7 w-7 text-white" />
+          </Button>
+        </div>
         <nav className="mt-3 px-3 py-4 lg:mt-9 lg:px-6">
           <div>
             <ul className="mb-6 flex flex-col gap-y-5">
@@ -138,6 +155,17 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                 >
                   <BiSolidFile className="h-5 w-5" />
                   Notice
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/admin/flash-news"
+                  className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-white no-underline duration-300 ease-in-out hover:bg-green-800 ${
+                    pathname.includes("flash-news") && "bg-green-700 text-white"
+                  }`}
+                >
+                  <BiSolidNews className="h-5 w-5" />
+                  Flash News
                 </Link>
               </li>
               <li>

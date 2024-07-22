@@ -7,29 +7,21 @@ export async function smtpSave(values:z.infer<typeof smtpFormSchema>) {
     try {
         const isValidFields = smtpFormSchema.parse(values);
 
+        const defaultSmtp = await db.smtp.findFirst();
         
-        
-       const newSmtp =  await db.smtp.upsert({
-            where: { username: isValidFields?.username},
-          
-              update: {
-                username: isValidFields.username,
-                password: isValidFields.password,
-                servername: isValidFields.servername,
-                port: isValidFields.port,
-                fromEmail: isValidFields.fromEmail,
-                toEmail: isValidFields.toEmail,
-                displayname: isValidFields.displayname
-              },
-              create: {
-                username: isValidFields.username,
-                password: isValidFields.password,
-                servername: isValidFields.servername,
-                port: isValidFields.port,
-                fromEmail: isValidFields.fromEmail,
-                toEmail: isValidFields.toEmail,
-                displayname: isValidFields.displayname
-              }
+        if(defaultSmtp){
+            await db.smtp.update({
+                where:{
+                    id:defaultSmtp.id
+                },
+                data:isValidFields
+            })
+
+            return { success: "SMTP updated Successfully" }
+        }
+
+        await db.smtp.create({
+            data:isValidFields
         })
 
         return { success: "SMTP Configured Successfully" }

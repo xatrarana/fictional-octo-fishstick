@@ -34,3 +34,4 @@ export const generateSlug = (title: string): string => {
     .replace(/^-+|-+$/g, '');   
   };
 
+

@@ -85,3 +85,10 @@ export const aboutSchema = z.object({
   mission: z.string().optional(),
   vission: z.string().optional(),
 });
+
+
+
+
+export const createFlashNewsSchema = z.object({
+  message: z.string().min(1, 'Message cannot be empty'),
+});
