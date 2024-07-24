@@ -5,11 +5,9 @@ import React from 'react'
 
 const ContactPage = () => {
   return (
-    <SiteLayout>
         <ContactWrapper>
             <ContactFrom/>
         </ContactWrapper>
-    </SiteLayout>
   )
 }
 

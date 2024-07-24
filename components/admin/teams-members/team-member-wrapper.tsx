@@ -3,6 +3,7 @@ import Loading from '@/app/admin/loading'
 import { Card } from '@/components/ui/card'
 import React, { Suspense } from 'react'
 import { MemberAddDialog } from './team-member-form'
+import OrgMemberItems from './team-member-items'
 
 const TeamMemberWrapper = () => {
   return (
@@ -17,7 +18,7 @@ const TeamMemberWrapper = () => {
     <ErrorBoundary>
       <Card>
         <Suspense fallback={<Loading />}>
-          {/* <OrgGroupItems /> */}
+        <OrgMemberItems/>
         </Suspense>
       </Card>
     </ErrorBoundary>

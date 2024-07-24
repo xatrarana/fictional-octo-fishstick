@@ -1,7 +1,4 @@
-import { RestPasswordTemplate } from '@/constant/rest-template';
-import { SocketAddress } from 'net';
-import { serverHooks } from 'next/dist/server/app-render/entry-base';
-import { Port_Lligat_Sans } from 'next/font/google';
+
 import * as z from 'zod';
 
 export const LoginSchema = z.object({
@@ -117,3 +114,30 @@ export const teamFromSchema = z.object({
   status: z.boolean().default(true).optional(),
     
 })
+
+
+
+export const OrganizationSchema = z.object({
+  id: z.string().optional(), 
+  name: z.string().max(50),
+  email: z.string().email().max(255),
+  phone: z.string().max(20),
+  landline: z.string().max(20).optional(),
+  address: z.string(),
+  primaryLogoUrl: z.string().optional(),
+  secondaryLogoUrl: z.string().optional(),
+  facebookUrl: z.string().optional(),
+  twitterUrl: z.string().optional(),
+  linkedinUrl: z.string().optional(),
+  instagramUrl: z.string().optional(),
+  youtubeUrl: z.string().optional(),
+  description: z.string(),
+  paymentLogoUrl: z.string().optional(),
+  paymentHeader: z.string().optional(),
+  websiteUrl: z.string().optional(),
+  contactPersonName: z.string().optional(),
+  contactPersonEmail: z.string().email().optional(),
+  contactPersonPhone: z.string().optional(),
+  createdAt: z.date().optional().default(new Date()), 
+  updatedAt: z.date().optional().default(new Date()),
+});

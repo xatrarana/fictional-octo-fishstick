@@ -21,11 +21,9 @@ import {
 import { FormErorr } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import { Button } from "@/components/ui/button";
-import { Member, OrganizationTeam, Position } from "@prisma/client";
 import { Input } from "@/components/ui/input";
-import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
-import { GetOrgGroups, SaveGroup, UpdateOrgGroup } from "@/actions/teams.group";
+import { GetOrgGroups } from "@/actions/teams.group";
 
 import {
   Select,
@@ -36,6 +34,11 @@ import {
 } from "@/components/ui/select";
 import { GetDesignations } from "@/actions/teams.position";
 import Image from "next/image";
+import { SaveMember, UpdateMember } from "@/actions/teams.member";
+import instance from "@/lib/axios";
+import { Progress } from "@/components/ui/progress";
+import { AxiosError } from "axios";
+import { Member, OrganizationTeam, Position } from "@/type";
 
 export const MemberAddDialog = () => {
   return (
@@ -59,12 +62,17 @@ type MemberFormProps = {
   editData?: Member;
 };
 export const MemberForm: React.FC<MemberFormProps> = ({ edit, editData }) => {
+
+  console.log(editData);
   const [error, setError] = useState<string | undefined>(undefined);
   const [success, setSuccess] = useState<string | undefined>(undefined);
   const [isPending, setIsPending] = useState(false);
 
   const [teams, setTeams] = useState<OrganizationTeam[]>([]);
   const [positions, setPositions] = useState<Position[]>([]);
+  const [selectedImage, setSelectedImage] = useState<string | null>(editData?.avatarUrl ?? null);
+  const [isUploading, setIsUploading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
 
   const form = useForm<z.infer<typeof memberFormSchema>>({
     resolver: zodResolver(memberFormSchema),
@@ -103,9 +111,9 @@ export const MemberForm: React.FC<MemberFormProps> = ({ edit, editData }) => {
     setIsPending(true);
 
     try {
-      //   const response = await UpdateOrgGroup(editData?.id!, data);
-      //   if (!!response.success) setSuccess(response.success);
-      //   if (!!response.error) setError(response.error);
+        const response = await UpdateMember(editData?.id!, data);
+        if (!!response.success) setSuccess(response.success);
+        if (!!response.error) setError(response.error);
     } catch (error) {
       if (error instanceof Error) setError(error.message);
 
@@ -120,32 +128,62 @@ export const MemberForm: React.FC<MemberFormProps> = ({ edit, editData }) => {
     setIsPending(true);
 
     try {
-      //   const response = await SaveGroup(data);
-      //   if (!!response.success) setSuccess(response.success);
-      //   if (!!response.error) setError(response.error);
+        const response = await SaveMember(data);
+        if (!!response.success) setSuccess(response.success);
     } catch (error) {
       if (error instanceof Error) setError(error.message);
-
       setError("Error submitting form. Please try again.");
     } finally {
       setIsPending(false);
     }
   };
 
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+ 
 
-  // Handler for image file change
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      const imageFile = e.target.files[0];
-      setSelectedImage(URL.createObjectURL(imageFile));
+  const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files || e.target.files.length === 0) {
+      setSelectedImage(null);
+      return;
     }
-  };
 
-  // Handler for image upload
-  const handleImageUpload = () => {
-    // Handle the image upload logic here
-    console.log("Image uploaded");
+    const file = e.target.files[0];
+    const imageUrl = URL.createObjectURL(file);
+    setSelectedImage(imageUrl);
+
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("dir", "avatar");
+
+    setIsUploading(true);
+
+    try {
+      const response = await instance.post("/api/teams/avatar", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        onUploadProgress: (progressEvent) => {
+          if (progressEvent.total) {
+            const { loaded, total } = progressEvent;
+            const percentage = Math.round((loaded * 100) / total);
+            setUploadProgress(percentage);
+          }
+        },
+      });
+
+      if(response.data.result.url){
+        form.setValue("avatarUrl",response.data.result.url);
+        setSelectedImage(response.data.result.url);
+      }
+    } catch (error) {
+      if(error instanceof Error){
+        setError(error.message);
+      }
+      if(error instanceof AxiosError){
+        setError(error.response?.data.error);
+      }
+    } finally {
+      setIsUploading(false);
+    }
   };
 
   return (
@@ -255,6 +293,8 @@ export const MemberForm: React.FC<MemberFormProps> = ({ edit, editData }) => {
               )}
             />
           </div>
+          <FormErorr message={error} />
+          <FormSuccess message={success} />
         </div>
         <div>
           <div className="space-y-4">
@@ -284,29 +324,22 @@ export const MemberForm: React.FC<MemberFormProps> = ({ edit, editData }) => {
             />
           </div>
 
-          <div>
+          <div className="space-y-6 ">
             {selectedImage && (
-              <div className="mt-4">
+              <div className="mt-4 rounded-sm p-1 flex justify-center">
                 <Image
-                  height={60}
-                  width={60}
+                  height={100}
+                  width={200}
                   src={selectedImage}
                   alt="Selected"
-                  className="block w-full max-h-64 object-cover rounded-md border"
+                  className="block w-auto h-auto rounded-sm"
                 />
-                <Button
-                  onClick={handleImageUpload}
-                  className="mt-2 w-full bg-green-700 text-white  hover:bg-green-800 focus:outline-none focus-visible:ring focus-visible:ring-green-700 focus-visible:ring-opacity-75"
-                >
-                  Upload
-                </Button>
               </div>
             )}
+
+            {isUploading && <Progress value={uploadProgress} />}
           </div>
         </div>
-
-        <FormErorr message={error} />
-        <FormSuccess message={success} />
 
         <Button
           type="submit"

@@ -118,6 +118,7 @@ const OrgGroupItems = () => {
             </TableCell>
             <TableCell>
                 <EnableIndicator isEnabled={group.status}/>
+                
             </TableCell>
              <TableCell className="text-center">
                 {group.displayOrder}

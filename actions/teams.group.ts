@@ -2,13 +2,14 @@
 import { db } from '@/lib/db';
 import { generateSlug } from '@/lib/utils';
 import { positionFormSchema, teamFromSchema } from '@/schemas';
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 import * as z from 'zod';
 
 export async function SaveGroup(data: z.infer<typeof teamFromSchema>) {
   
     try {
         const isValid = teamFromSchema.parse(data);
-        const slug = generateSlug(isValid.name);
+        const slug = isValid.name.trim().split(' ').join('-').toLowerCase();
 
 
         const isExist = await db.organizationTeam.findFirst({
@@ -50,7 +51,7 @@ export async function UpdateOrgGroup(id: string, data: z.infer<typeof teamFromSc
     try {
         
         const isValid = teamFromSchema.parse(data);
-        const slug = generateSlug(isValid.name);
+        const slug = isValid.name.trim().split(' ').join('-').toLowerCase();
 
         const isExist = await db.organizationTeam.findFirst({
             where: {id}
@@ -78,13 +79,20 @@ export async function UpdateOrgGroup(id: string, data: z.infer<typeof teamFromSc
             group
         }
     } catch (error) {
+        console.log(error)
         if(error instanceof z.ZodError){
             return {
                 error: error.message
             }
         }
 
-        return {error: 'Error submitting form. Please try again.'}
+        if(error instanceof PrismaClientKnownRequestError){
+            return {
+                error: error.message
+            }
+        }
+
+        return {error: 'Error updating the group. Please try again.'}
     }
 }
 

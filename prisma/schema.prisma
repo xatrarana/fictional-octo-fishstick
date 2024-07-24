@@ -93,8 +93,6 @@ model Organization {
   paymentLogoUrl        String?
   paymentHeader      String?
   websiteUrl         String?
-  country            String?
-  noOfEmployees      Int?
   contactPersonName      String?
   contactPersonEmail String?
   contactPersonPhone String?

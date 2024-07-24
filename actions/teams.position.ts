@@ -180,3 +180,5 @@ export async function GetDesignationsWithPagination(page: number = 1, limit: num
         return { error: 'Something went wrong. Please try again.' };
     }
 }
+
+

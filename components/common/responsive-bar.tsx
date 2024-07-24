@@ -16,7 +16,21 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 import { BiMenu } from "react-icons/bi";
 
-const ResponsiveBar = () => {
+type Group = {
+  
+    id: string;
+    name: string;
+    slug: string;
+    status: boolean;
+    displayOrder: number | null;
+    createdAt: Date;
+    updatedAt: Date;
+}
+
+type ResponsiveBarProps = {
+  groups: Group[];
+}
+const ResponsiveBar = ({groups}:ResponsiveBarProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const handleOnClick = () => {
     setIsOpen(!isOpen);
@@ -47,14 +61,16 @@ const ResponsiveBar = () => {
             </Link>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <NavigationMenuTrigger>हाम्रा सेवाहरु</NavigationMenuTrigger>
+            {/* <NavigationMenuTrigger>हाम्रा सेवाहरु</NavigationMenuTrigger> */}
+            <NavigationMenuTrigger>हाम्रो बारेमा</NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className="grid gap-3 p-1 min-w-[200px]">
-                {aboutComponents.map((component) => (
+                <ListItem title="हाम्रो परिचय" href="/about"></ListItem>
+                {groups.map((group) => (
                   <ListItem
-                    key={component.title}
-                    title={component.title}
-                    href={component.href}
+                    key={group.id}
+                    title={group.name}
+                    href={`/team-types/${group.id}`}
                   ></ListItem>
                 ))}
               </ul>
@@ -113,7 +129,7 @@ const ListItem = React.forwardRef<
         <a
           ref={ref}
           className={cn(
-            "block select-none space-y-1 rounded-md p-3 leading-none  no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+            "block select-none space-y-1 rounded-md p-3 leading-none  no-underline outline-none transition-colors hover:bg-accent hover:text-green-700 focus:bg-accent focus:text-accent-foreground",
             className
           )}
           {...props}
