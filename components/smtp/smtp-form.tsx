@@ -24,7 +24,7 @@ const SMTPForm = () => {
         servername: "",
         username: "",
         password: "",
-        port: 465,
+        port: '',
         displayname: "",
         fromEmail: "",
         toEmail: "",

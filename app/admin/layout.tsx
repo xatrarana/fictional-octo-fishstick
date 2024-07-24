@@ -1,5 +1,4 @@
 import DefaultLayout from '@/components/common/dashboard-navbar'
-import NavBar from '@/components/common/nav-bar'
 import React from 'react'
 
 

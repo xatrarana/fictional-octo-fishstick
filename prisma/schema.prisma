@@ -129,10 +129,10 @@ model Notice {
 model OrganizationTeam {
   id        String   @id @default(cuid())
   name      String   @db.VarChar(255)
-  chairman  String?  @db.VarChar(255)
-  viceChairman String? @db.VarChar(255)
-  secretary String?  @db.VarChar(255)
+  slug      String   @unique @db.VarChar(255)
   members   Member[] 
+  status    Boolean   @default(true)
+  displayOrder Int?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -142,15 +142,18 @@ model Member {
   organizationTeamId String @db.VarChar(255)
   name            String   @db.VarChar(255)
   positionId          String
+  displayOrder    Int?
+  avatarUrl       String?
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
   organizationTeam OrganizationTeam @relation(fields: [organizationTeamId], references: [id])
-  position             Positon             @relation(fields: [positionId], references: [id])
+  position             Position             @relation(fields: [positionId], references: [id])
 }
 
-model Positon {
+model Position {
   id        String   @id @default(cuid())
   name      String   @db.VarChar(255)
+  slug      String   @unique @db.VarChar(255)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

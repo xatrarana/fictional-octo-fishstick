@@ -4,67 +4,67 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
-import { createFlashNewsSchema } from "@/schemas";
+import {   teamFromSchema } from "@/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { FormErorr } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import { SaveFlashNews, UpdateFlashNews } from "@/actions/flash-news";
-import { FlashNews } from "@prisma/client";
-import { Checkbox } from "@/components/ui/checkbox";
+import { OrganizationTeam } from "@prisma/client";
+import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
+import { SaveGroup, UpdateOrgGroup } from "@/actions/teams.group";
 
-export const FlashAddDialog = () => {
+export const OrgGroupAddDialog = () => {
   return (
     <Dialog>
       <DialogTrigger className="px-3 rounded-md py-2 bg-green-800 text-sm hover:bg-green-700 text-white">
-        Add Flash News
+        Add Organizationl Group
       </DialogTrigger>
       <DialogContent>
-        <DialogTitle>Add Flash News</DialogTitle>
-        <DialogDescription>Add a new flash news details.</DialogDescription>
+        <DialogTitle>Add Organizational Groups</DialogTitle>
+        <DialogDescription>Fill below fields with details.</DialogDescription>
         <div>
-          <FlashForm />
+          <OrgGroupForm />
         </div>
       </DialogContent>
     </Dialog>
   );
 };
 
-type FlashFormProps = {
+type OrgGroupFormProps = {
   edit?: boolean;
-  editData?: FlashNews;
+  editData?: OrganizationTeam;
 };
-export const FlashForm: React.FC<FlashFormProps> = ({ edit, editData }) => {
+export const OrgGroupForm: React.FC<OrgGroupFormProps> = ({ edit, editData }) => {
   const [error, setError] = useState<string | undefined>(undefined);
   const [success, setSuccess] = useState<string | undefined>(undefined);
   const [isPending, setIsPending] = useState(false);
 
-  const form = useForm<z.infer<typeof createFlashNewsSchema>>({
-    resolver: zodResolver(createFlashNewsSchema),
+  const form = useForm<z.infer<typeof teamFromSchema>>({
+    resolver: zodResolver(teamFromSchema),
     defaultValues: {
-      message: editData?.message ?? "",
-      enabled: editData?.enabled ?? true,
+      name: editData?.name ?? "",
+      displayOrder: editData?.displayOrder?.toString() ?? '',
+      status: editData?.status ?? true,
     },
   });
 
-  const onEdit = async (data: z.infer<typeof createFlashNewsSchema>) => {
+  const onEdit = async (data: z.infer<typeof teamFromSchema>) => {
     setError(undefined);
     setSuccess(undefined);
     setIsPending(true);
 
     try {
-      const response = await UpdateFlashNews(editData?.id!, data);
+      const response = await UpdateOrgGroup(editData?.id!, data);
       if (!!response.success) setSuccess(response.success);
+      if (!!response.error) setError(response.error);
     } catch (error) {
       if (error instanceof Error) setError(error.message);
 
@@ -73,14 +73,15 @@ export const FlashForm: React.FC<FlashFormProps> = ({ edit, editData }) => {
       setIsPending(false);
     }
   };
-  const onSubmit = async (data: z.infer<typeof createFlashNewsSchema>) => {
+  const onSubmit = async (data: z.infer<typeof teamFromSchema>) => {
     setError(undefined);
     setSuccess(undefined);
     setIsPending(true);
 
     try {
-      const response = await SaveFlashNews(data);
+      const response = await SaveGroup(data);
       if (!!response.success) setSuccess(response.success);
+      if (!!response.error) setError(response.error);
     } catch (error) {
       if (error instanceof Error) setError(error.message);
 
@@ -98,39 +99,56 @@ export const FlashForm: React.FC<FlashFormProps> = ({ edit, editData }) => {
       >
         <div className="space-y-4">
           <FormField
-            name="message"
+            name="name"
             control={form.control}
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Textarea
+                  <Input
                     {...field}
-                    placeholder="Flash News Message"
+                    placeholder="Name of Organization Group"
                     className="h-10 autofill-bg-blue focus-visible:border-green-700 focus-visible:ring-green-700"
                   />
+                </FormControl>
+                <FormMessage/>
+              </FormItem>
+            )}
+          />
+        </div>
+        <div className="space-y-4">
+          <FormField
+            name="displayOrder"
+            control={form.control}
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Input
+                    {...field}
+                    placeholder="Order to display"
+                    className="h-10 autofill-bg-blue focus-visible:border-green-700 focus-visible:ring-green-700"
+                  />
+                </FormControl>
+                <FormMessage/>
+              </FormItem>
+            )}
+          />
+        </div>
+        <div className="space-y-4">
+          <FormField
+            name="status"
+            control={form.control}
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                <div className="flex items-center space-x-2">
+                      <Switch onCheckedChange={field.onChange}  id={field.name} checked={field.value} />
+                      <Label htmlFor={field.name}>Group Status</Label>
+                    </div>
                 </FormControl>
               </FormItem>
             )}
           />
         </div>
-        {edit && (
-          <div className="space-y-4">
-            <FormField
-              name="enabled"
-              control={form.control}
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <div className="flex items-center space-x-2">
-                      <Switch onCheckedChange={field.onChange}  id={field.name} checked={field.value} />
-                      <Label htmlFor={field.name}>Flash News Status</Label>
-                    </div>
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-          </div>
-        )}
         <FormErorr message={error} />
         <FormSuccess message={success} />
 

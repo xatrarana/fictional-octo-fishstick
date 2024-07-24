@@ -21,23 +21,24 @@ import {
 
 
 import instance from "@/lib/axios";
-import {  FlashNews } from "@prisma/client";
+import {  FlashNews, Position } from "@prisma/client";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { DeleteFlashNews } from "@/actions/flash-news";
 import { TruncateWords } from "@/constant/truncate-component";
 import EditButton from "@/components/edit-button";
-import { FlashForm } from "./flash-form";
 import { BiSolidTrashAlt } from "react-icons/bi";
 import { EnableIndicator } from "@/constant/active-indicator";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
+import { DeleteDesignation, GetDesignationsWithPagination } from "@/actions/teams.position";
+import { PositionForm } from "./position-form";
 
 const ITEMS_PER_PAGE = 5;
 
-const FlashItems = () => {
+const PositionItems = () => {
   const {toast} = useToast()
-  const [flashNews, setFlashNews] = React.useState<FlashNews[]>([]);
+  const [positions, setPositions] = React.useState<Position[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(1);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -48,10 +49,12 @@ const FlashItems = () => {
     setIsLoading(true);
     setError(null);
     try {
-      const res = await instance.get(`/api/flash-news?page=${page}&limit=${limit}`);
-      const { flashNews, pagination } = res.data;
-      setFlashNews(flashNews);
+      const res = await GetDesignationsWithPagination(page, limit);
+      const { designations, pagination } = res;
+      setPositions(designations as Position[]);
+      if(pagination){
       setTotalPages(pagination.totalPages);
+      setCurrentPage(pagination.page);}
     } catch (err) {
       setError('Failed to fetch data.');
     } finally {
@@ -64,13 +67,13 @@ const FlashItems = () => {
 
 
 
-  const onClickDeleteBanner = async (id: number) => {
+  const onClickDeletePosition = async (id: string) => {
     try {
-      const response = await DeleteFlashNews(id)
+      const response = await DeleteDesignation(id)
       if(!!response.success){
         fetchSliders(currentPage, ITEMS_PER_PAGE);
         toast({
-          title: 'FlashNews Info',
+          title: 'Positions Info',
           description: response.success,
           type: 'foreground'
         })
@@ -80,7 +83,7 @@ const FlashItems = () => {
       if(error instanceof Error){
         toast({
           variant:"destructive",
-          title: 'FlashNews Error',
+          title: 'Positions Error',
           description: error.message,
           type: 'foreground'
         })
@@ -100,31 +103,32 @@ const FlashItems = () => {
       <TableHeader>
         <TableRow>
           <TableHead className="w-[100px]">SN</TableHead>
-          <TableHead>Message</TableHead>
-          <TableHead className="text-center">Status</TableHead>
+          <TableHead>Name</TableHead>
+          <TableHead className="text-center">Slug</TableHead>
           <TableHead className="text-right">Actions</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
-        {flashNews &&
-          flashNews.map((news, index) => (
-            <TableRow key={news.id}>
+        {positions &&
+          positions.map((position, index) => (
+            <TableRow key={position.id}>
               <TableCell className="font-medium">{index + 1}</TableCell>
+            <TableCell>
+                {position.name}
+            </TableCell>
+            <TableCell>
+                {position.slug}
+            </TableCell>
+             
 
-              <TableCell>
-                <TruncateWords text={news.message} maxWords={10} />
-              </TableCell>
-
-              <TableCell>
-                  <EnableIndicator isEnabled={news.enabled} />
-              </TableCell>
+           
               <TableCell className="text-right flex gap-x-5 justify-end">
                 <EditButton descriptionText="update the item here." headerText="Update Flash News" >
-                   <FlashForm editData={news}  edit/>
+                   <PositionForm editData={position}  edit/>
                 </EditButton>
 
 
-                <Button variant={"outline"} onClick={() => onClickDeleteBanner(news.id)}>
+                <Button variant={"outline"} onClick={() => onClickDeletePosition(position.id)}>
                     <BiSolidTrashAlt/>
                 </Button>
               </TableCell>
@@ -180,4 +184,4 @@ const FlashItems = () => {
   );
 };
 
-export default FlashItems;
+export default PositionItems;

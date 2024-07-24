@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import React from "react";
 
 interface EnableIndicatorProps {
@@ -22,15 +22,16 @@ interface EnableIndicatorProps {
 export const EnableIndicator = ({
   isEnabled,
 }: EnableIndicatorProps): JSX.Element => {
+ 
   return (
-    <div
-      className="flex items-center justify-center rounded-full"
-    >
-        <div
-            className={`w-4 h-4 rounded-full ${
-            isEnabled ? "bg-green-500" : "bg-red-500"
-            }`}
-        ></div>
+    <div className=" flex items-center justify-center">
+      {
+        isEnabled ? (
+          <span className="w-4 h-4 rounded-full bg-green-500"></span>
+        ) : (
+          <span className="w-4 h-4 rounded-full bg-red-500"></span>
+        )
+      }
     </div>
   );
 };

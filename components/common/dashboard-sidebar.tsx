@@ -22,6 +22,9 @@ import {
   BiGridSmall,
   BiCollapse,
   BiSolidNews,
+  BiSolidGroup,
+  BiSolidSpeaker,
+  BiSolidMegaphone,
 } from "react-icons/bi";
 import { signOut } from "next-auth/react";
 import { Button } from "../ui/button";
@@ -80,7 +83,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   return (
     <aside
       ref={sidebar}
-      className={`absolute left-0 top-0 z-50 flex h-screen w-64  flex-col overflow-y-hidden bg-gray-800 duration-300 ease-linear  lg:static lg:translate-x-0 ${
+      className={`absolute left-0 top-0 z-50 flex h-screen  w-72  flex-col overflow-y-hidden bg-gray-800 duration-300 ease-linear  lg:static lg:translate-x-0 ${
         sidebarOpen ? "translate-x-0" : "-translate-x-full"
       }`}
     >
@@ -127,7 +130,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                 <Link
                   href="/admin/org"
                   className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-white no-underline duration-300 ease-in-out hover:bg-green-800 ${
-                    pathname.includes("org") && "bg-green-700 text-white"
+                    pathname.includes("/admin/org") && "bg-green-700 text-white"
                   }`}
                 >
                   <BiSolidBuilding className="h-5 w-5" />
@@ -146,28 +149,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                   Banner
                 </Link>
               </li>
-              <li>
-                <Link
-                  href="/admin/notice"
-                  className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-white no-underline duration-300 ease-in-out hover:bg-green-800 ${
-                    pathname.includes("notice") && "bg-green-700 text-white"
-                  }`}
-                >
-                  <BiSolidFile className="h-5 w-5" />
-                  Notice
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/admin/flash-news"
-                  className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-white no-underline duration-300 ease-in-out hover:bg-green-800 ${
-                    pathname.includes("flash-news") && "bg-green-700 text-white"
-                  }`}
-                >
-                  <BiSolidNews className="h-5 w-5" />
-                  Flash News
-                </Link>
-              </li>
+             
               <li>
                 <Link
                   href="/admin/gallery"
@@ -190,6 +172,147 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                   Enquiry
                 </Link>
               </li>
+
+           <SidebarLinkGroup
+                activeCondition={
+                  pathname === "/announcements" || pathname.includes("announcements")
+                }
+              >
+                {(handleClick, open) => {
+                  return (
+                    <React.Fragment>
+                      <Link
+                        href="#"
+                        className={`group no-underline relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-white duration-300 ease-in-out hover:bg-green-800  ${
+                          (pathname === "/announcements" ||
+                            pathname.includes("announcements")) &&
+                          "bg-green-700 "
+                        }`}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          sidebarExpanded
+                            ? handleClick()
+                            : setSidebarExpanded(true);
+                        }}
+                      >
+                        <BiSolidMegaphone className="h-5 w-5 text-white" />
+                        announcements
+                        <BiChevronDown
+                          className={`absolute right-4 top-1/2 h-6 w-6 -translate-y-1/2 fill-current ${
+                            open && "rotate-180"
+                          }`}
+                        />
+                      </Link>
+                      <div
+                        className={`translate transform overflow-hidden ${
+                          !open && "hidden"
+                        }`}
+                      >
+                        <ul className="mb-5.5 mt-2 flex flex-col gap-2.5 pl-6">
+                        <li>
+                <Link
+                  href="/admin/notice"
+                  className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-white no-underline duration-300 ease-in-out hover:bg-green-800 ${
+                    pathname.includes("notice") && "bg-green-700 text-white"
+                  }`}
+                >
+                  <BiSolidFile className="h-5 w-5" />
+                  Notice
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/admin/flash-news"
+                  className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-white no-underline duration-300 ease-in-out hover:bg-green-800 ${
+                    pathname.includes("flash-news") && "bg-green-700 text-white"
+                  }`}
+                >
+                  <BiSolidNews className="h-5 w-5" />
+                  Flash News
+                </Link>
+              </li>
+                        </ul>
+                      </div>
+                    </React.Fragment>
+                  );
+                }}
+              </SidebarLinkGroup>
+           <SidebarLinkGroup
+                activeCondition={
+                  pathname === "/teams" || pathname.includes("teams")
+                }
+              >
+                {(handleClick, open) => {
+                  return (
+                    <React.Fragment>
+                      <Link
+                        href="#"
+                        className={`group no-underline relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-white duration-300 ease-in-out hover:bg-green-800  ${
+                          (pathname === "/teams" ||
+                            pathname.includes("teams")) &&
+                          "bg-green-700 "
+                        }`}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          sidebarExpanded
+                            ? handleClick()
+                            : setSidebarExpanded(true);
+                        }}
+                      >
+                        <BiSolidGroup className="h-5 w-5 text-white" />
+                        Teams
+                        <BiChevronDown
+                          className={`absolute right-4 top-1/2 h-6 w-6 -translate-y-1/2 fill-current ${
+                            open && "rotate-180"
+                          }`}
+                        />
+                      </Link>
+                      <div
+                        className={`translate transform overflow-hidden ${
+                          !open && "hidden"
+                        }`}
+                      >
+                        <ul className="mb-5.5 mt-2 flex flex-col gap-2.5 pl-6">
+                          <li>
+                            <Link
+                              href="/admin/teams/positions"
+                              className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-white no-underline duration-300 ease-in-out hover:bg-green-800 py-2  ${
+                                pathname === "/admin/teams/positions" &&
+                                "text-white bg-green-700"
+                              }`}
+                            >
+                              Positions
+                            </Link>
+                          </li>
+                          <li>
+                            <Link
+                              href="/admin/teams/members"
+                              className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-white no-underline duration-300 ease-in-out hover:bg-green-800 py-2  ${
+                                pathname === "/admin/teams/members" &&
+                                "text-white bg-green-700"
+                              }`}
+                            >
+                              Members
+                            </Link>
+                          </li>
+                          <li>
+                            <Link
+                              href="/admin/teams/org-groups"
+                              className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-white no-underline duration-300 ease-in-out hover:bg-green-800 py-2  ${
+                                pathname === "/admin/teams/org-groups" &&
+                                "text-white bg-green-700"
+                              }`}
+                            >
+                              Organizational Groups
+                            </Link>
+                          </li>
+                       
+                        </ul>
+                      </div>
+                    </React.Fragment>
+                  );
+                }}
+              </SidebarLinkGroup>
 
               <SidebarLinkGroup
                 activeCondition={

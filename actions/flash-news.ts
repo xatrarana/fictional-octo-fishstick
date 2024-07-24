@@ -53,12 +53,15 @@ export async function UpdateFlashNews(id:number, values:z.infer<typeof createFla
     try {
         const isValid = createFlashNewsSchema.parse(values);
 
-        const {message} = isValid;
+        const {message,enabled} = isValid;
+
+        console.log({message,enabled});
 
         const flashNews = await db.flashNews.update({
             where: {id},
             data: {
                 message,
+                enabled,
                 updatedAt: new Date(),
             }
         });

@@ -38,7 +38,7 @@ export async function sendMail(to: string, from: string, subject: string, html: 
     const connectionValues = await getFirstSmtpConnection();
     const info = await transporter!.sendMail({
       from: `${connectionValues?.displayname} <${connectionValues?.from ?? from}>`,
-      to:connectionValues?.to ?? to,
+      to,
       subject,
       html
     });

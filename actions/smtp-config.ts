@@ -14,14 +14,20 @@ export async function smtpSave(values:z.infer<typeof smtpFormSchema>) {
                 where:{
                     id:defaultSmtp.id
                 },
-                data:isValidFields
+                data:{
+                    ...isValidFields,
+                    port: Number(isValidFields.port),
+                }
             })
 
             return { success: "SMTP updated Successfully" }
         }
 
         await db.smtp.create({
-            data:isValidFields
+            data:{
+                ...isValidFields,
+                port: Number(isValidFields.port),
+            }
         })
 
         return { success: "SMTP Configured Successfully" }

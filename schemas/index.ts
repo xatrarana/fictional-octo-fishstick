@@ -57,7 +57,7 @@ export const smtpFormSchema = z.object({
   password: z.string().min(1, 'Password is required'),
   servername: z.string().min(1, 'Servername is required'),
   displayname: z.string().min(1, 'Displayname is required'),
-  port: z.number().positive('Port must be a positive number'),
+  port: z.string(),
   fromEmail: z.string().email('Invalid email format for fromEmail'),
   toEmail: z.string().email('Invalid email format for toEmail').optional(),
 });
@@ -91,4 +91,29 @@ export const aboutSchema = z.object({
 
 export const createFlashNewsSchema = z.object({
   message: z.string().min(1, 'Message cannot be empty'),
+  enabled: z.boolean().default(true).optional(),
 });
+
+
+
+export const positionFormSchema = z.object({
+  name: z.string().min(1, 'Designation or Position name is required'),
+
+})
+
+
+export const memberFormSchema  = z.object({
+  organizationTeamId: z.string().min(1, 'Organization is required'),  
+  positionId: z.string().min(1, 'Position is required'),
+  name: z.string().min(1, 'Name is required'),
+  displayOrder: z.string().optional(),
+  avatarUrl: z.string().optional(),
+})
+
+
+export const teamFromSchema = z.object({
+  name: z.string().min(1, 'Team name is required'),
+  displayOrder: z.string().optional(),
+  status: z.boolean().default(true).optional(),
+    
+})

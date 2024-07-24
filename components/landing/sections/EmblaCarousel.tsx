@@ -4,6 +4,7 @@ import { EmblaOptionsType } from 'embla-carousel'
 import Autoplay from 'embla-carousel-autoplay'
 import useEmblaCarousel from 'embla-carousel-react'
 import { Banner } from '@prisma/client';
+import { Skeleton } from '@/components/ui/skeleton';
 
 type PropType = {
   slides: Banner[] | null
@@ -18,7 +19,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
     <section className="embla">
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container">
-          {slides?.map((slide,index) => (
+          {slides && slides.length > 0 && slides?.map((slide,index) => (
             <div className="embla__slide" key={index}>
               <div className="embla__slide__number relative">
                 <img className='rounded-md' src={slide.imageUrl} alt={slide.title} />
@@ -28,6 +29,16 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
               </div>
             </div>
           ))}
+
+          {
+            slides && slides.length === 0 && (
+              <div className="embla__slide">
+                <div className="embla__slide__number">
+                <Skeleton className="h-full w-full" />
+                </div>
+              </div>
+            )
+          }
         </div>
       </div>
     </section>

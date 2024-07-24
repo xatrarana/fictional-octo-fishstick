@@ -1,17 +1,22 @@
 export const aboutComponents: { title: string; href: string; }[] = [
     {
       title: "हाम्रो परिचय",
-      href: "/docs/primitives/alert-dialog",
+      href: "/about",
     
     },
     {
-      title: "हाम्रा समितिहरु",
-      href: "/docs/primitives/hover-card",
+      title: "निर्देशक मण्डल",
+      href: "/team-types/board-of-directors",
+     
+    },
+    {
+      title: "लेखा समिति",
+      href: "/team-types/accounting-committee",
      
     },
     {
       title: "अध्यक्षबाट सन्देश",
-      href: "/docs/primitives/progress",
+      href: "/message/chairman-message",
     },
     
   ]

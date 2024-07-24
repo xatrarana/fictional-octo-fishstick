@@ -6,7 +6,7 @@ import { GetFlashNews } from '@/actions/flash-news'
 const NavBar = async () => {
   const flashNews = await GetFlashNews();
   return (
-    <header className='shadow-sm py-2 px-1 '>
+    <header className=' px-1 shadow-sm '>
       {/* <div className='max-w-7xl flex items-center justify-center lg:justify-start  mx-auto'>
         <Image src={logo} alt="Logo" className='object-cover rounded-sm' width={320} height={100}/>
       </div> */}
@@ -17,7 +17,7 @@ const NavBar = async () => {
         <ResponsiveBar/>
      </div>
      <div className='flex'>
-     <div className="w-full flex items-center overflow-hidden h-8 bg-gradient-to-r from-green-50 to-green-100">
+     <div className="w-full flex items-center overflow-hidden h-8 bg-gradient-to-r from-slate-50 to-green-50">
   <div className="animate-marquee flex ">
     {/* <div className="mr-2">
       <p className="text-center text-xs text-green-700 whitespace-nowrap">
