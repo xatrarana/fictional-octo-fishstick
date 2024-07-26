@@ -25,8 +25,9 @@ import {
   BiSolidGroup,
   BiSolidSpeaker,
   BiSolidMegaphone,
+  BiLogoMediumOld,
+  BiSolidCategoryAlt,
 } from "react-icons/bi";
-import { signOut } from "next-auth/react";
 import { Button } from "../ui/button";
 
 interface SidebarProps {
@@ -138,7 +139,69 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                 </Link>
               </li>
 
+             
+
               <li>
+                <Link
+                  href="/admin/enquiry"
+                  className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-white no-underline duration-300 ease-in-out hover:bg-green-800 ${
+                    pathname.includes("calender") && "bg-green-700 text-white"
+                  }`}
+                >
+                  <BiSolidMessage className="h-5 w-5" />
+                  Enquiry
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/admin/category"
+                  className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-white no-underline duration-300 ease-in-out hover:bg-green-800 ${
+                    pathname.includes("category") && "bg-green-700 text-white"
+                  }`}
+                >
+                  <BiSolidCategoryAlt className="h-5 w-5" />
+                  Category
+                </Link>
+              </li>
+
+           <SidebarLinkGroup
+                activeCondition={
+                  pathname === "/visual" || pathname.includes("visual")
+                }
+              >
+                {(handleClick, open) => {
+                  return (
+                    <React.Fragment>
+                      <Link
+                        href="#"
+                        className={`group no-underline relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-white duration-300 ease-in-out hover:bg-green-800  ${
+                          (pathname === "/visual" ||
+                            pathname.includes("visual")) &&
+                          "bg-green-700 "
+                        }`}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          sidebarExpanded
+                            ? handleClick()
+                            : setSidebarExpanded(true);
+                        }}
+                      >
+                        <BiLogoMediumOld className="h-5 w-5 text-white" />
+                        Media &amp; Banners
+                        <BiChevronDown
+                          className={`absolute right-4 top-1/2 h-6 w-6 -translate-y-1/2 fill-current ${
+                            open && "rotate-180"
+                          }`}
+                        />
+                      </Link>
+                      <div
+                        className={`translate transform overflow-hidden ${
+                          !open && "hidden"
+                        }`}
+                      >
+                        <ul className="mb-5.5 mt-2 flex flex-col gap-2.5 pl-6">
+                      
+                        <li>
                 <Link
                   href="/admin/banner"
                   className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-white no-underline duration-300 ease-in-out hover:bg-green-800 ${
@@ -161,18 +224,12 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                   Gallery
                 </Link>
               </li>
-              <li>
-                <Link
-                  href="/admin/enquiry"
-                  className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-white no-underline duration-300 ease-in-out hover:bg-green-800 ${
-                    pathname.includes("calender") && "bg-green-700 text-white"
-                  }`}
-                >
-                  <BiSolidMessage className="h-5 w-5" />
-                  Enquiry
-                </Link>
-              </li>
-
+                        </ul>
+                      </div>
+                    </React.Fragment>
+                  );
+                }}
+              </SidebarLinkGroup>
            <SidebarLinkGroup
                 activeCondition={
                   pathname === "/announcements" || pathname.includes("announcements")

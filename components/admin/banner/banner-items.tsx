@@ -114,7 +114,7 @@ const BannerItems = () => {
               <TableCell>
                 <HoverCard>
                   <HoverCardTrigger>
-                    <img
+                    <Image
                       src={banner.imageUrl}
                       alt={banner.title}
                       width={100}
@@ -122,7 +122,7 @@ const BannerItems = () => {
                     />
                   </HoverCardTrigger>
                   <HoverCardContent>
-                    <img
+                    <Image
                       src={banner.imageUrl}
                       alt={banner.title}
                       className="w-auto h-auto"

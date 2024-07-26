@@ -2,18 +2,21 @@ import React from "react";
 import logo from "@/public/logo/triLogo.webp";
 import Image from "next/image";
 import ResponsiveBar from "./responsive-bar";
-import { GetFlashNews } from "@/actions/flash-news";
+import { GetActiveFlashNews } from "@/actions/flash-news";
 import { getGroupsByOrder } from "@/data/group";
 import Link from "next/link";
+import { getCategories } from "@/actions/category";
 const NavBar = async () => {
-  const flashNews = await GetFlashNews();
+  const flashNews = await GetActiveFlashNews();
   const groups = await getGroupsByOrder();
+
+  const response = await getCategories();
 
 
 
 
   return (
-    <header className=" px-1 shadow-sm ">
+    <header className=" px-1  shadow-sm ">
       <div className="max-w-7xl mx-auto mt-2 flex items-center justify-between relative">
         <Link href={'/'} className=" flex items-center">
           <Image
@@ -24,15 +27,15 @@ const NavBar = async () => {
             height={100}
           />
         </Link>
-        <ResponsiveBar groups={groups} />
+        <ResponsiveBar groups={groups} categories={response.categories} />
       </div>
       <div className="flex">
-        <div className="w-full flex items-center overflow-hidden h-8 bg-gradient-to-r from-slate-50 to-green-50">
-          <div className="animate-marquee flex ">
+        <div className="w-full flex items-center overflow-hidden h-8 bg-gradient-to-r from-white-50 to-slate-50">
+          <div className="animate-marquee flex  items-center  w-full ">
             {flashNews.length > 0 &&
               flashNews.map((news, index) => (
                 <div key={index} className="mr-2">
-                  <p className="text-center text-xs text-green-700 whitespace-nowrap">
+                  <p className="text-center text-sm text-green-700 whitespace-nowrap">
                     {news.message}
                   </p>
                 </div>

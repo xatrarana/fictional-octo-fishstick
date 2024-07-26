@@ -3,7 +3,6 @@ import OrganizationForm from './org-form'
 import ErrorBoundary from '@/app/_error-boundary'
 import Loading from '@/app/admin/loading'
 import { GetDetailsData } from '@/data/org'
-import { Organization } from '@prisma/client'
 import { OrganizationSchema } from '@/schemas'
 import * as z from 'zod'
 

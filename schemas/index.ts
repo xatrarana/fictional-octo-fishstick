@@ -54,7 +54,7 @@ export const smtpFormSchema = z.object({
   password: z.string().min(1, 'Password is required'),
   servername: z.string().min(1, 'Servername is required'),
   displayname: z.string().min(1, 'Displayname is required'),
-  port: z.string(),
+  port: z.union([z.string(), z.number(), z.undefined()]),
   fromEmail: z.string().email('Invalid email format for fromEmail'),
   toEmail: z.string().email('Invalid email format for toEmail').optional(),
 });
@@ -140,4 +140,26 @@ export const OrganizationSchema = z.object({
   contactPersonPhone: z.string().optional(),
   createdAt: z.date().optional().default(new Date()), 
   updatedAt: z.date().optional().default(new Date()),
+});
+
+
+
+export const CategorySchema = z.object({
+  id: z.string().optional(),
+  name: z.string().min(1,"Name of category is required"), 
+  slug: z.string().optional(), 
+  status: z.boolean().default(true),  
+  text: z.string().optional(), 
+  categoryImageUrl: z.string().optional(),
+});
+
+
+export const ServiceSchema = z.object({
+  id: z.string().optional(),
+  name: z.string().min(1,"Service name is required"), 
+  slug: z.string().optional(), 
+  text: z.string().optional(),
+  status: z.boolean().default(true),
+  imageUrl: z.string().optional(),
+  categoryId: z.string().min(1,"Invalid category ID"), 
 });

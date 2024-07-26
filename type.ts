@@ -30,3 +30,15 @@ export interface Position {
     position: Position; 
   }
   
+
+
+  export interface SMTPConnection {
+      servername: string | undefined;
+      port: number | undefined;
+      username: string | undefined;
+      password: string | undefined;
+      displayname: string | undefined;
+      to: string | null | undefined;
+      from: string | undefined;
+
+  }

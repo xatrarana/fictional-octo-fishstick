@@ -8,7 +8,7 @@ export async function smtpSave(values:z.infer<typeof smtpFormSchema>) {
         const isValidFields = smtpFormSchema.parse(values);
 
         const defaultSmtp = await db.smtp.findFirst();
-        
+
         if(defaultSmtp){
             await db.smtp.update({
                 where:{
@@ -22,15 +22,7 @@ export async function smtpSave(values:z.infer<typeof smtpFormSchema>) {
 
             return { success: "SMTP updated Successfully" }
         }
-
-        await db.smtp.create({
-            data:{
-                ...isValidFields,
-                port: Number(isValidFields.port),
-            }
-        })
-
-        return { success: "SMTP Configured Successfully" }
+        return {error: "SMTP Configuration not found"}
     } catch (error) {
         if(error instanceof z.ZodError) return {error: error.message};
         return {error:"Something went wrong while saving credentials."}

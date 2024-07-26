@@ -3,18 +3,17 @@ import React from "react";
 import {
   NavigationMenu,
   NavigationMenuContent,
-  NavigationMenuIndicator,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import { aboutComponents } from "@/constant/nav-components";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { BiMenu } from "react-icons/bi";
+import { Category } from "@prisma/client";
 
 type Group = {
   
@@ -29,8 +28,9 @@ type Group = {
 
 type ResponsiveBarProps = {
   groups: Group[];
+  categories: Category[];
 }
-const ResponsiveBar = ({groups}:ResponsiveBarProps) => {
+const ResponsiveBar = ({groups,categories}:ResponsiveBarProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const handleOnClick = () => {
     setIsOpen(!isOpen);
@@ -77,13 +77,20 @@ const ResponsiveBar = ({groups}:ResponsiveBarProps) => {
             </NavigationMenuContent>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <Link href="/docs" legacyBehavior passHref>
-              <NavigationMenuLink
-                className={cn("no-underline", navigationMenuTriggerStyle())}
-              >
-                सन्देश
-              </NavigationMenuLink>
-            </Link>
+            <NavigationMenuTrigger>हाम्रा सेवाहरु</NavigationMenuTrigger>
+            <NavigationMenuContent>
+              <ul className="grid gap-3 p-1 min-w-[300px]">
+                <ListItem title="हाम्रो परिचय" href="/about"></ListItem>
+                <ListItem title="Message from Chairman" href="/message/chairman"></ListItem>
+                {categories.map((category) => (
+                  <ListItem
+                    key={category.id}
+                    title={category.name}
+                    href={`/schemes/${category.id}`}
+                  ></ListItem>
+                ))}
+              </ul>
+            </NavigationMenuContent>
           </NavigationMenuItem>
           <NavigationMenuItem>
             <Link href="/docs" legacyBehavior passHref>

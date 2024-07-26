@@ -4,9 +4,9 @@ import React from 'react'
 
 const NotFound = () => {
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-100">
-    <div className="max-w-md text-center p-4">
-      <div className="mb-8">
+    <div className="flex items-center justify-center h-screen">
+    <div className="max-w-md  w-full mx-auto text-center p-4">
+      <div className="mb-8 flex items-center justify-center">
         <Image
           src="/not-found.svg" 
           alt="Not Found"

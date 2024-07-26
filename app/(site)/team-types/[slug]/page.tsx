@@ -12,10 +12,14 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { GetGroupById } from "@/actions/teams.group";
+import NotFoundForLayout from "@/app/_not-found";
 
 const TeamPage = async ({ params }: { params: { slug: string } }) => {
   const teams = await GetMembersByOrgId(params.slug);
   const res = await GetGroupById(params.slug)
+
+  if(teams.members.length <= 0 && !res.group) return <NotFoundForLayout/>
+
   const { members } = teams;
   return <MemberList org={res.group?.name as string} url={params.slug} members={members} />;
 };

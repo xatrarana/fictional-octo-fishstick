@@ -33,3 +33,14 @@ interface TruncateWordsProps {
   
     return <>{truncatedText}</>;
   };
+  export const TruncateString: React.FC<TruncateWordsProps> = ({ text, maxWords }) => {
+    const words = text.split(' ');
+  
+    // Determine if the text should be truncated
+    const shouldTruncate = words.length > maxWords;
+  
+    // Create the truncated text
+    const truncatedText = shouldTruncate ? words.slice(0, maxWords).join(' ') + '...' : text;
+  
+    return truncatedText
+  };

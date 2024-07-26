@@ -56,7 +56,7 @@ import { FormSuccess } from "../form-success";
             <FormSuccess message={success}/>
          </div>
          <DrawerFooter className="flex-row float-right">
-            <Button onClick={handleConfigurationCheck}>Submit</Button>
+            <Button className="bg-green-800 hover:bg-green-700" onClick={handleConfigurationCheck}>Submit</Button>
             <DrawerClose asChild>
               <Button variant="outline">Cancel</Button>
             </DrawerClose>

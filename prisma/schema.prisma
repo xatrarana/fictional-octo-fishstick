@@ -158,27 +158,6 @@ model Position {
   members   Member[]
 }
 
-model Service {
-  id         String    @id @default(cuid())
-  name       String    @db.VarChar(255)
-  slug       String    @unique @db.VarChar(255)
-  isEnabled  Boolean   @default(true)
-  products   Product[]
-  createdAt  DateTime  @default(now())
-  updatedAt  DateTime  @updatedAt
-}
-
-model Product {
-  id         String    @id @default(cuid())
-  name       String    @db.VarChar(255)
-  slug       String    @unique @db.VarChar(255)
-  serviceId  String
-  service    Service   @relation(fields: [serviceId], references: [id])
-  isEnabled  Boolean   @default(true)
-  createdAt  DateTime  @default(now())
-  updatedAt  DateTime  @updatedAt
-}
-
 
 model Gallery {
   id         String    @id @default(cuid())
@@ -208,3 +187,34 @@ model FlashNews {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+
+model Category {
+  id                String   @id @default(cuid())   
+  name              String                         
+  slug              String   @unique                
+  status            Boolean                          
+  text              String?  @db.Text              
+  categoryImageUrl  String?
+  services          Service[]
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt                        
+
+  @@index([slug])                                 
+}
+
+model Service {
+  id            String   @id @default(cuid())   
+  name          String                         
+  slug          String   @unique               
+  text          String?  @db.Text  
+  status        Boolean           
+  imageUrl      String?                         
+  categoryId    String                          
+  category      Category @relation(fields: [categoryId], references: [id]) 
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([slug])                               
+}
+

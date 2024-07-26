@@ -8,9 +8,11 @@ import {
     CardTitle,
   } from "@/components/ui/card"
 import SmtpTestContianer from './smtp-test'
+import { getFirstSmtpConnection } from '@/data/smtp'
 
 const SmtpFormLazy = React.lazy(() => import('./smtp-form'))
-const SmtpWrapper = () => {
+const SmtpWrapper = async () => {
+  const data = await getFirstSmtpConnection()
   return (
     <Card className='w-full'>
     <CardHeader>
@@ -21,7 +23,7 @@ const SmtpWrapper = () => {
         <SmtpTestContianer/>
       </div>
       <Suspense fallback={<div>Loading...</div>}>
-        <SmtpFormLazy/>
+        <SmtpFormLazy data={data}/>
       </Suspense>
     </CardContent>
    

@@ -1,0 +1,22 @@
+{
+    "name": "Trijyoti Credits and Savings Co-operative Ltd.",
+    "short_name": "Trijyoti Website",
+    "description": "Trijyoti Credits and Savings Co-operative Ltd. is a financial institution that provides financial services to its members.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#166534",
+    "icons": [
+      {
+        "src": "/tri-192x192.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      },
+      {
+        "src": "/tri-512x512.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
+    ]
+  }
+  

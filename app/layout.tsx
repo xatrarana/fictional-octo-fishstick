@@ -4,6 +4,7 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/toaster"
 import { auth } from "@/auth";
 import { SessionProvider } from "next-auth/react";
+import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,6 +23,10 @@ export default async function RootLayout({
   return (
    <SessionProvider session={session}>
      <html lang="en">
+      <Head>
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="manifest" href="/manifest.json" />
+      </Head>
       <body className={inter.className}>
        {children}
        <Toaster/>

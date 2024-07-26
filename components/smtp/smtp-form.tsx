@@ -11,47 +11,30 @@ import { FormErorr } from "../form-error";
 import { FormSuccess } from "../form-success";
 import { smtpSave } from "@/actions/smtp-config";
 import instance from "@/lib/axios";
+import { SMTPConnection } from "@/type";
+
+type smtpFormProps = {
+  data: SMTPConnection | null;
+}
+
 
 type smtpFormType = z.infer<typeof smtpFormSchema>;
-const SMTPForm = () => {
+const SMTPForm = ({data}:smtpFormProps) => {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>(undefined);
   const [success, setSuccess] = useState<string | undefined>(undefined);
-  const [smtpConfig, setSmtpConfig] = useState<smtpFormType | undefined>(undefined);
   const form = useForm<smtpFormType>({
     resolver: zodResolver(smtpFormSchema),
     defaultValues: {
-        servername: "",
-        username: "",
-        password: "",
-        port: '',
-        displayname: "",
-        fromEmail: "",
-        toEmail: "",
+        servername: data?.servername ?? "",
+        username:data?.username ?? "",
+        password: data?.password ?? "",
+        port: data?.port?? '',
+        displayname: data?.displayname ?? "",
+        fromEmail: data?.from ?? "",
+        toEmail: data?.to ?? "",
     },
   });
-
-  const fetchSmtpConfig = async () => {
-    try {
-        const response = await instance.get('/api/config/smtp');
-        setSmtpConfig(response.data.smtp);
-    } catch (error) {
-      setError("Something went wrong!!");
-        
-    }
-  }
-
-
-  useEffect(() =>{
-    fetchSmtpConfig();
-  },[])
-
-
-  useEffect(() => {
-    if (smtpConfig) {
-      form.reset(smtpConfig);
-    }
-  }, [smtpConfig, form]);
 
   const onSubmit = async (data: smtpFormType) => {
     setError(undefined);

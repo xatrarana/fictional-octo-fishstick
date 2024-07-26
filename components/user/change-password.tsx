@@ -52,19 +52,19 @@ export function ChangePasswordField() {
           <BiSolidLockAlt className="h-5 w-5 text-green-800" />
           Change Password
       </SheetTrigger>
-      <SheetContent>
+      <SheetContent className="space-y-3">
         <SheetHeader>
           <SheetTitle>Change Password</SheetTitle>
         </SheetHeader>
 
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-1">
             <div className="grid gap-4 py-4 space-y-4">
                 <FormField
                   control={form.control}
                   name="currentPassword"
                   render={({ field }) => (
-                    <FormItem className="grid grid-cols-4 items-center gap-4">
+                    <FormItem className="grid grid-cols-1 md:grid-cols-4 items-center gap-4">
                       <FormLabel className="text-muted-foreground" htmlFor="currentPassword">
                         Current Password
                       </FormLabel>
@@ -84,7 +84,7 @@ export function ChangePasswordField() {
                   control={form.control}
                   name="newPassword"
                   render={({ field }) => (
-                    <FormItem className="grid grid-cols-4 items-center gap-4">
+                    <FormItem className="grid grid-cols-1 md:grid-cols-4 items-center gap-4">
                       <FormLabel className="text-muted-foreground" htmlFor="newPassword">New Password</FormLabel>
                       <FormControl>
                         <Input
@@ -101,7 +101,7 @@ export function ChangePasswordField() {
                   control={form.control}
                   name="confirmPassword"
                   render={({ field }) => (
-                    <FormItem className="grid grid-cols-4 items-center gap-4">
+                    <FormItem className="grid grid-cols-1 md:grid-cols-4 items-center gap-4">
                       <FormLabel className="text-muted-foreground" htmlFor="confirmPassword">
                         Confirm Password
                       </FormLabel>
@@ -120,7 +120,7 @@ export function ChangePasswordField() {
                   <FormErorr message={error} />
                   <FormSuccess message={success} />
             </div>
-            <SheetFooter>
+            <SheetFooter className="flex flex-col gap-y-3">
               <SheetClose asChild>
                 <Button variant={"destructive"}>Close</Button>
               </SheetClose>

@@ -32,10 +32,24 @@ export async function GetFlashNews() {
         orderBy: {createdAt: "desc"}
     });
 
+
+
+
     if(!flashNews) return [];
 
     return flashNews;
 
+}
+
+
+export async function GetActiveFlashNews() {
+    const flashNews = await db.flashNews.findMany({
+        orderBy: {createdAt: "desc"}
+    });
+
+    if(!flashNews) return [];
+
+    return flashNews.filter(x => x.enabled)
 }
 
 

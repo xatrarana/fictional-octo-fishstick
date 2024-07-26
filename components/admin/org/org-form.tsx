@@ -29,13 +29,13 @@ const Editor = dynamic(() => import("@/components/admin/about/editor"), {
 });
 
 type OrganizationFormProps = {
-  data: z.infer<typeof OrganizationSchema>;
+  data: z.infer<typeof OrganizationSchema> | null;
 };
 
 const OrganizationForm = ({ data }: OrganizationFormProps) => {
-  const [priLogoUrl, setPriLogoUrl] = React.useState<string | null>(data.primaryLogoUrl ?? null);
-  const [secLogoUrl, setSecLogoUrl] = React.useState<string | null>(data.secondaryLogoUrl ?? null);
-  const [paymentLogoUrl, setPaymentLogoUrl] = React.useState<string | null>(data.paymentLogoUrl ?? null);
+  const [priLogoUrl, setPriLogoUrl] = React.useState<string | null>(data?.primaryLogoUrl ?? null);
+  const [secLogoUrl, setSecLogoUrl] = React.useState<string | null>(data?.secondaryLogoUrl ?? null);
+  const [paymentLogoUrl, setPaymentLogoUrl] = React.useState<string | null>(data?.paymentLogoUrl ?? null);
 
   const [isUploading, setIsUploading] = React.useState(false);
   const [uploadProgress, setUploadProgress] = React.useState(0);
@@ -204,11 +204,11 @@ const OrganizationForm = ({ data }: OrganizationFormProps) => {
     resolver: zodResolver(OrganizationSchema),
     defaultValues:{
         ...data,
-        facebookUrl: data.facebookUrl ?? "",
-        twitterUrl: data.twitterUrl ?? "",
-        instagramUrl: data.instagramUrl ?? "",
-        linkedinUrl: data.linkedinUrl ?? "",
-        youtubeUrl: data.youtubeUrl ?? "",
+        facebookUrl: data?.facebookUrl ?? "",
+        twitterUrl: data?.twitterUrl ?? "",
+        instagramUrl: data?.instagramUrl ?? "",
+        linkedinUrl: data?.linkedinUrl ?? "",
+        youtubeUrl: data?.youtubeUrl ?? "",
         
     }
   });
@@ -455,7 +455,7 @@ const OrganizationForm = ({ data }: OrganizationFormProps) => {
                     onChange={field.onChange}
                     name={field.name}
                     id={field.name}
-                    initialContent={data.description}
+                    initialContent={data?.description}
                   />
                 </FormControl>
                 <FormMessage />

@@ -24,7 +24,7 @@ const Footer = () => {
         <div className='md:col-span-2 lg:col-span-2'>
           <Link href={'/'} className='flex items-center no-underline gap-x-3 w-full '>
             {
-              <Image width={70} height={70} className='bg-blend-screen' src={samll} alt={"data.companyName"} />
+              <Image width={70} height={70} className='invert brightness-0' src={samll} alt={"data.companyName"} />
             }
             <h3 className='text-white text-md  lg:font-semibold lg:text-2xl md:text-xl'>{"Trijyoti Saving and Credit Co-operative Ltd."}</h3>
           </Link>
