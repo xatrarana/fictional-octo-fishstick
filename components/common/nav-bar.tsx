@@ -25,6 +25,7 @@ const NavBar = async () => {
             className="object-cover rounded-sm"
             width={320}
             height={100}
+            priority
           />
         </Link>
         <ResponsiveBar groups={groups} categories={response.categories} />

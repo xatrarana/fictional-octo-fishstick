@@ -16,28 +16,32 @@ import { BiMenu } from "react-icons/bi";
 import { Category } from "@prisma/client";
 
 type Group = {
-  
-    id: string;
-    name: string;
-    slug: string;
-    status: boolean;
-    displayOrder: number | null;
-    createdAt: Date;
-    updatedAt: Date;
-}
+  id: string;
+  name: string;
+  slug: string;
+  status: boolean;
+  displayOrder: number | null;
+  createdAt: Date;
+  updatedAt: Date;
+};
 
 type ResponsiveBarProps = {
   groups: Group[];
   categories: Category[];
-}
-const ResponsiveBar = ({groups,categories}:ResponsiveBarProps) => {
+};
+const ResponsiveBar = ({ groups, categories }: ResponsiveBarProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const handleOnClick = () => {
     setIsOpen(!isOpen);
   };
   return (
     <>
-      <Button onClick={handleOnClick} variant={"ghost"} className="lg:hidden">
+      <Button
+        aria-label="Open menu"
+        onClick={handleOnClick}
+        variant={"ghost"}
+        className="lg:hidden"
+      >
         <BiMenu className="w-6 h-6 text-green-700 font-bold flex items-center " />
       </Button>
       <NavigationMenu
@@ -81,7 +85,10 @@ const ResponsiveBar = ({groups,categories}:ResponsiveBarProps) => {
             <NavigationMenuContent>
               <ul className="grid gap-3 p-1 min-w-[300px]">
                 <ListItem title="हाम्रो परिचय" href="/about"></ListItem>
-                <ListItem title="Message from Chairman" href="/message/chairman"></ListItem>
+                <ListItem
+                  title="Message from Chairman"
+                  href="/message/chairman"
+                ></ListItem>
                 {categories.map((category) => (
                   <ListItem
                     key={category.id}

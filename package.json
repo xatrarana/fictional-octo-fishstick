@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "node server.js",
     "build": "next build",
-    "start": "SET NODE_ENV=production & node server.js",
+    "start": "cross-env NODE_ENV=production node server.js",
     "lint": "next lint"
   },
   "prisma": {
@@ -39,6 +39,7 @@
     "ckeditor5-premium-features": "^42.0.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "cross-env": "^7.0.3",
     "dompurify": "^3.1.6",
     "dotenv": "^16.4.5",
     "embla-carousel": "^8.1.7",

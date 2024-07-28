@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   Table,
   TableBody,
@@ -43,26 +43,27 @@ const SchemesItems = ({categoryId}:{categoryId:string}) => {
   const router = useRouter()
 
 
-  const fetchGroups = async (page?: number, limit?: number,cid?:string) => {
+  const fetchGroups = useCallback(async (page?: number, limit?: number, cid?: string) => {
     setIsLoading(true);
     setError(null);
     try {
-      console.log("categoryId",categoryId)
-      const res = await GetServicesWithPagination(page, limit,cid!);
+      const res = await GetServicesWithPagination(page, limit, cid!);
       const { schems, pagination } = res;
       setServices(schems as z.infer<typeof ServiceSchema>[]);
-      if(pagination){
-      setTotalPages(pagination.totalPages);
-      setCurrentPage(pagination.page);}
+      if (pagination) {
+        setTotalPages(pagination.totalPages);
+        setCurrentPage(pagination.page);
+      }
     } catch (err) {
       setError('Failed to fetch data.');
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [setIsLoading, setError, setServices, setTotalPages, setCurrentPage]);
+  
   useEffect(() => {
-    fetchGroups(currentPage, ITEMS_PER_PAGE,categoryId);
-  }, [currentPage,router,categoryId]);
+    fetchGroups(currentPage, ITEMS_PER_PAGE, categoryId);
+  }, [currentPage, categoryId, router, fetchGroups]);
 
 
 

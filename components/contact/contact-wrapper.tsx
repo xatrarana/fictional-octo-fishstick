@@ -1,6 +1,10 @@
 import React, { Suspense } from 'react'
 import { ContactSideBar } from './contact-side-bar'
-import MapWrapper from './map-wrapper'
+import dynamic from 'next/dynamic'
+
+const MapWrapper = dynamic(() => import('./map-wrapper'), {ssr: true})
+
+
 
 const ContactWrapper = ({children}:{children:React.ReactNode}) => {
   return (

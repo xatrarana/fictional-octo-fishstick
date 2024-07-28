@@ -32,8 +32,8 @@ const RelatedScheme = async ({ sid }: RelatedSchemeProps) => {
         !!services.success &&
         services.services &&
         services.services.map((service: Service) => (
-         <Link href={`/schemes/details/${service.id}`}>
-          <Card className="hover:cursor-pointer" key={service.id}>
+         <Link  key={service.id} href={`/schemes/details/${service.id}`}>
+          <Card className="hover:cursor-pointer" >
             <CardHeader>
               <CardTitle>{service.name}</CardTitle>
             </CardHeader>

@@ -1,17 +1,16 @@
 import React from 'react'
 import SiteLayout from './site-layout'
-import { CarouselWrapper } from '@/components/landing/sections'
-import EmblaCarousel from '@/components/landing/sections/EmblaCarousel'
 import { getBanners } from '@/actions/banner'
+import dynamic from 'next/dynamic'
 
 
+const EmblaCarousel = dynamic(() => import('@/components/landing/sections/EmblaCarousel'), {ssr: true})
 const SiteRender = async () => {
  const response = await getBanners()
   return (
     <SiteLayout>
       <section className=''>
         <div className=''>
-          {/* <CarouselWrapper  /> */}
           <EmblaCarousel slides={response}/>
         </div>
       </section>

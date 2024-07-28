@@ -1,6 +1,8 @@
-import AboutWrapper from '@/components/about/about-wrapper'
+import dynamic from 'next/dynamic'
 import React from 'react'
 
+
+const AboutWrapper = dynamic(() => import('@/components/about/about-wrapper'), {ssr: true})
 const AboutPage = () => {
   return (
     <AboutWrapper/>
