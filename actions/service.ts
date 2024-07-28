@@ -38,6 +38,7 @@ async function getServiceById(id: string) {
     try {
         const service = await db.service.findUnique({
             where: { id },
+            include: { category: true },
         });
         if (!service) throw new Error('Service not found');
         return {success:true,service};

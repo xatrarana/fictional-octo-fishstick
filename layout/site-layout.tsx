@@ -6,7 +6,7 @@ const SiteLayout:React.FC<LayoutProps> = ({children}:LayoutProps) => {
   return (
     <>
     <NavBar />
-    <main className='w-full max-w-7xl mx-auto p-2'>
+    <main className='w-full max-w-7xl mx-auto space-y-6 mt-3'>
         {children}
     </main>
     <Footer />

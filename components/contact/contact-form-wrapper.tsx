@@ -14,7 +14,7 @@ import {
   }
 const ContactFormWrapper = ({children,cardTitle,cardDesc}:ContactFormWrapperProps) => {
   return (
-    <Card className='w-full'>
+    <Card className='w-full shadow-none border-none'>
       <CardHeader>
         <CardTitle>{cardTitle}</CardTitle>
         <CardDescription className='mt-2'>{cardDesc}</CardDescription>

@@ -209,6 +209,10 @@ const OrganizationForm = ({ data }: OrganizationFormProps) => {
         instagramUrl: data?.instagramUrl ?? "",
         linkedinUrl: data?.linkedinUrl ?? "",
         youtubeUrl: data?.youtubeUrl ?? "",
+        paymentLogoUrl: data?.paymentLogoUrl ?? "",
+        primaryLogoUrl: data?.primaryLogoUrl ?? "",
+        secondaryLogoUrl: data?.secondaryLogoUrl ?? "",
+        mapUrl: data?.mapUrl ?? "",
         
     }
   });
@@ -230,8 +234,6 @@ const OrganizationForm = ({ data }: OrganizationFormProps) => {
 
         form.reset(response.org as z.infer<typeof OrganizationSchema>);
     } catch (error) {
-
-        console.error(error);
         
         if (error instanceof Error) {
             toast({
@@ -318,6 +320,19 @@ const OrganizationForm = ({ data }: OrganizationFormProps) => {
               )}
             />
             <FormField
+              name="whatsappNumber"
+              control={form.control}
+              render={({ field }) => (
+                <FormItem>
+                  <Label>Whatsapp Number </Label>
+                  <FormControl>
+                    <Input {...field} placeholder="Whatsapp number" />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
               name="address"
               control={form.control}
               render={({ field }) => (
@@ -331,6 +346,22 @@ const OrganizationForm = ({ data }: OrganizationFormProps) => {
               )}
             />
           </div>
+        </Card>
+        {/* map section */}
+        <Card className="space-y-3">
+          <FormField
+            name="mapUrl"
+            control={form.control}
+            render={({ field }) => (
+              <FormItem>
+                <Label>Map Url</Label>
+                <FormControl>
+                  <Textarea {...field} placeholder="Google map url" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
         </Card>
         {/* second section */}
         <Card className="space-y-3">

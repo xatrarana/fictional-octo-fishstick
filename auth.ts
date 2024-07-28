@@ -17,21 +17,16 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
 
   //callbacks 
   callbacks: {
-    async signIn({ user,account}) {
-      return true;
-    },
-
-
     async session({ session, token }) {
       if (token.sub && session.user) {
         session.user.id = token.sub
       }
 
-      // check if user has username
      
       return session;
     },
     async jwt({ token }) {
+      token.exp = Math.floor(Date.now() / 1000) + 10 * 60;
       return token
     },
   }

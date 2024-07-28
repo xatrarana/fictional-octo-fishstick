@@ -122,6 +122,7 @@ export const OrganizationSchema = z.object({
   name: z.string().max(50),
   email: z.string().email().max(255),
   phone: z.string().max(20),
+  whatsappNumber: z.string().max(20).optional(),
   landline: z.string().max(20).optional(),
   address: z.string(),
   primaryLogoUrl: z.string().optional(),
@@ -138,6 +139,7 @@ export const OrganizationSchema = z.object({
   contactPersonName: z.string().optional(),
   contactPersonEmail: z.string().email().optional(),
   contactPersonPhone: z.string().optional(),
+  mapUrl: z.string().optional(),
   createdAt: z.date().optional().default(new Date()), 
   updatedAt: z.date().optional().default(new Date()),
 });

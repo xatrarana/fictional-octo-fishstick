@@ -45,6 +45,11 @@ export default auth((req) =>{
 })
 
 
+// export const config = {
+//    matcher: ['/((?!.*\\..*|_next).*)', '/', '/(api|trpc)(.*)'],
+//   };
+
+
 export const config = {
-   matcher: ['/((?!.*\\..*|_next).*)', '/', '/(api|trpc)(.*)'],
+    matcher: ['/admin', '/admin/:path*','/auth/login'],
   };

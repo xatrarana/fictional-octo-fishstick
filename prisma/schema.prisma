@@ -80,6 +80,7 @@ model Organization {
   name      String   @db.VarChar(50)
   email     String   @db.VarChar(255)
   phone     String   @db.VarChar(20)
+  whatsappNumber String?   @db.VarChar(20)
   landline  String?   @db.VarChar(20)
   address   String   @db.Text
   primaryLogoUrl String?
@@ -96,6 +97,8 @@ model Organization {
   contactPersonName      String?
   contactPersonEmail String?
   contactPersonPhone String?
+
+  mapUrl    String?  @db.Text
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
