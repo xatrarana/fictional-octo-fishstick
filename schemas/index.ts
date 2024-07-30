@@ -165,3 +165,13 @@ export const ServiceSchema = z.object({
   imageUrl: z.string().optional(),
   categoryId: z.string().min(1,"Invalid category ID"), 
 });
+
+
+export const noticeSchema = z.object({
+  id: z.string().optional(),  
+  title: z.string().max(100),
+  fileUrl: z.string().optional(),
+  status: z.boolean().default(true),
+  createdAt: z.date().optional(),
+  updatedAt: z.date().optional(),
+});

@@ -33,7 +33,7 @@ const Footer = async () => {
     <footer className="flex  flex-col bg-green-800 pt-4">
       <div
         className={cn([
-          "footer grid  gap-3 grid-cols-1  md:grid-cols-2 lg:grid-cols-6 w-full max-w-7xl mx-auto p-2  md:p-5",
+          " grid  gap-3 grid-cols-1  md:grid-cols-3 lg:grid-cols-6 w-full max-w-7xl mx-auto p-2  md:p-5",
           `${
             data?.paymentHeader
               ? "lg:grid-cols-6"

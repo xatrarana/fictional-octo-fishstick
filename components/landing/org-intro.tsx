@@ -32,6 +32,7 @@ const OrgIntro = async () => {
                 width={300}
                 height={200}
                 className="object-cover rounded-full "
+                layout="responsive"
               />
             )}
 

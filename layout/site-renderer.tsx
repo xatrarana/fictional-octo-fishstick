@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import SiteLayout from "./site-layout";
 import { getBanners } from "@/actions/banner";
 import dynamic from "next/dynamic";
@@ -22,7 +22,7 @@ const NoticeSection = dynamic(() => import("@/components/landing/notice-section"
 
 const EmblaCarousel = dynamic(
   () => import("@/components/landing/sections/EmblaCarousel"),
-  { ssr: true }
+  { ssr: false }
 );
 const SiteRender = async () => {
   const response = await getBanners();
@@ -30,23 +30,29 @@ const SiteRender = async () => {
     <SiteLayout>
       <section className="space-y-3">
         <EmblaCarousel slides={response} />
+
       </section>
       <Separator/>
       <section className="space-y-3">
         <OrgIntro />
+
       </section>
       <Separator/>
       <section className="space-y-3">
         <ServicesSection />
       </section>
       <section className="space-y-3">
-        <GallerySection />
+        {/* <GallerySection /> */}
       </section>
       <section className="space-y-3">
-        <NoticeSection />
+        {/* <NoticeSection /> */}
       </section>
     </SiteLayout>
   );
 };
 
 export default SiteRender;
+
+
+
+

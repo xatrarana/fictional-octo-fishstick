@@ -100,7 +100,7 @@ const ResponsiveBar = ({ groups, categories }: ResponsiveBarProps) => {
             </NavigationMenuContent>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <Link href="/docs" legacyBehavior passHref>
+            <Link href="/notices" legacyBehavior passHref>
               <NavigationMenuLink
                 className={cn("no-underline", navigationMenuTriggerStyle())}
               >
@@ -110,7 +110,7 @@ const ResponsiveBar = ({ groups, categories }: ResponsiveBarProps) => {
           </NavigationMenuItem>
 
           <NavigationMenuItem>
-            <Link href="/docs" legacyBehavior passHref>
+            <Link href="/gallery" legacyBehavior passHref>
               <NavigationMenuLink
                 className={cn("no-underline", navigationMenuTriggerStyle())}
               >

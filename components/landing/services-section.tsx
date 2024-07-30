@@ -9,9 +9,13 @@ const ServicesSection = async () => {
   const services = await getCategories()
   return (
    <div className='space-y-5'>
-    <div className='bg-green-800 text-white py-3 rounded-sm'>
+    {
+      services && services.categories && services.categories.length > 0 && (
+        <div className='bg-green-800 text-white py-3 rounded-sm'>
       <h1 className='txet-xl ml-5  md:lg:text-2xl font-semibold'>Our Services</h1>
     </div>
+      )
+    }
      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 '>
 
 
@@ -30,7 +34,7 @@ const ServicesSection = async () => {
             src={service?.categoryImageUrl || '/image-not-found.jpg'}
             alt={service?.name}
             width={100}
-            height={70}
+            height={50}
             loading='lazy'
             className='rounded-md object-cover'
           />
