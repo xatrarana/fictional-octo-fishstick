@@ -1,4 +1,6 @@
 
+import { dir } from 'console';
+import { use } from 'react';
 import * as z from 'zod';
 
 export const LoginSchema = z.object({
@@ -175,3 +177,41 @@ export const noticeSchema = z.object({
   createdAt: z.date().optional(),
   updatedAt: z.date().optional(),
 });
+
+
+
+
+export const messageSchema = z.object({
+  id: z.string().optional(),
+  message: z.string().min(1, "Message is required"),
+  memberId: z.string().min(1, "Member ID is required"),
+  status: z.boolean().default(true),
+  createdAt: z.date().optional(),
+  updatedAt: z.date().optional(),
+
+});
+
+
+export const gallerySchema = z.object({
+  id: z.string().optional(),
+  title: z.string().max(255),
+  dir: z.string().optional(),
+  slug: z.string().optional(),
+  createdAt: z.date().default(new Date()),
+  updatedAt: z.date().default(new Date()),
+});
+
+export const imageSchema = z.object({
+  id: z.string().optional(),  
+  url: z.string().optional(),
+  altText: z.string().optional(),
+  updatedAt: z.date().optional(),
+});
+
+
+export const useUpdateSchema = z.object({
+  id:z.string(),
+  name: z.string().min(1, "Name is required").optional(),
+  email: z.string().email("Invalid email address").optional(),
+  username: z.string().min(1, "Username is required").optional(),
+})

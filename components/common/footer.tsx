@@ -172,7 +172,7 @@ const Footer = async () => {
                 <div className="bg-gray-100 flex items-center justify-center rounded-full">
                   <Link
                     target="_blank"
-                    href={data?.whatsappNumber ?? "https://whatsapp.com/"}
+                    href={`https://wa.me/${data?.whatsappNumber}`?? "https://whatsapp.com/"}
                     aria-label="Whatsapp"
                   >
                     <BiLogoWhatsapp className="h-7 w-7 text-green-500 p-0.5" />
@@ -241,7 +241,7 @@ const Footer = async () => {
 
         <div className="group relative ">
           <ToolTipItem text={"Powered by Aarshia Infotech Pvt. Ltd."}>
-            <Link href={"https:/aiz.com.np"} className="group" target="_blank">
+            <Link href={"https://aiz.com.np"} className="group" target="_blank">
               <Image
                 src={AI}
                 alt="AI"

@@ -39,6 +39,15 @@ export const CardDetailsLoader = () => {
     </Card>
   )
 }
+export const ImageDetailsLoader = () => {
+  return (
+    <Card className="space-y-6 my-4 p-4">
+      <div className="flex flex-col space-y-3">
+        <Skeleton className="h-[50lvh] w-full rounded-md" />
+      </div>
+    </Card>
+  )
+}
 
 export const VoidLoader = () => {
   return (

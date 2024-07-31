@@ -145,6 +145,7 @@ model Member {
   avatarUrl       String?
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
+  Message         Message[]
   organizationTeam OrganizationTeam @relation(fields: [organizationTeamId], references: [id])
   position             Position             @relation(fields: [positionId], references: [id])
 }
@@ -158,14 +159,24 @@ model Position {
 
   members   Member[]
 }
+model Message {
+  id         String   @id @default(cuid())
+  message    String   @db.Text
+  memberId   String
+  member     Member   @relation(fields: [memberId], references: [id])
+  status     Boolean  @default(true)
+  // Optional fields
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
 
 
 model Gallery {
   id         String    @id @default(cuid())
   title      String    @db.VarChar(255)
+  path        String    
   slug       String    @unique @db.VarChar(255)
-  description String?  @db.Text
-  images     Image[]
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt
 }
@@ -174,8 +185,6 @@ model Image {
   id         String    @id @default(cuid())
   url        String    @db.Text
   altText    String?   @db.VarChar(255)
-  galleryId  String
-  gallery    Gallery   @relation(fields: [galleryId], references: [id])
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt
 }

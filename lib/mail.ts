@@ -1,5 +1,6 @@
 import { getFirstSmtpConnection } from '@/data/smtp';
 import nodemailer from 'nodemailer';
+import path from 'path';
 
 let transporter: nodemailer.Transporter | undefined;
 
@@ -43,9 +44,9 @@ export async function sendMail(to: string, from: string, subject: string, html: 
       html
     });
 
-    console.log("Message sent: %s", info.messageId);
   } catch (error) {
     console.error("Error sending email:", error);
     throw error;
   }
 }
+

@@ -16,6 +16,13 @@ async function main() {
     )
   );
 
+  if(upsertedRoles){
+    console.log({upsertedRoles});
+  }
+  else{
+    console.error('Roles not found');
+  }
+
   const adminRole = upsertedRoles.find(role => role.name === 'admin');
   if (adminRole) {
     const adminUser = await client.user.upsert({
@@ -50,6 +57,13 @@ async function main() {
       displayname:'Trijyoti Credits & Cooperative Ltd.',
     }
   })
+
+  if(smtp){
+    console.log({smtp});
+  }
+  else{
+    console.error('SMTP not found');
+  }
 }
 
 main()

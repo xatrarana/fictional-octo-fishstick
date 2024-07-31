@@ -1,9 +1,15 @@
+import ErrorBoundary from '@/app/_error-boundary'
 import SmtpWrapper from '@/components/smtp/smpt-wrapper'
-import React from 'react'
+import React, { Suspense } from 'react'
+import Loading from '../loading'
 
 const SmtpConfigPage = () => {
   return (
-    <SmtpWrapper/>
+    <ErrorBoundary>
+      <Suspense fallback={<Loading/>}>
+        <SmtpWrapper/>
+      </Suspense>
+    </ErrorBoundary>
   )
 }
 

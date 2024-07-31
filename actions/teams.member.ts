@@ -67,7 +67,8 @@ export async function GetMembers() {
             orderBy: { createdAt: 'desc' },
             include: {
                 position: true,
-                organizationTeam: true
+                organizationTeam: true,
+                Message: true
             }
         })
 

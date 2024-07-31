@@ -1,4 +1,5 @@
 'use server';
+import { getFirstSmtpConnection } from '@/data/smtp';
 import { db } from '@/lib/db';
 import { sendMail } from '@/lib/mail';
 import { contactFormSchema } from '@/schemas';
@@ -15,16 +16,19 @@ export async function submitEnquiry(values: zod.infer<typeof contactFormSchema>)
                 createdAt: new Date().toISOString()
             }
         })
+
+        const connection = await getFirstSmtpConnection();
+        
         await sendMail(
-            validValues.email,
-            "no-reply@tri-jyoit.coop.np",
-            'Your enquiry has been submitted',
-            `Thank you for your enquiry. We will get back to you as soon as possible.`,
+            connection?.to ?? "",
+            enquiry.email,
+            enquiry.subject,
+            enquiry.message,
         )
 
         return {success: "Your enquiry has been submitted"};
     } catch (ex) {
         if(ex instanceof zod.ZodError) return {error: ex.message};
-        return {error: "An error occurred"};
+        return {error: "An error occurred. Please try again later."};
     }
 }

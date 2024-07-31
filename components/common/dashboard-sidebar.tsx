@@ -27,6 +27,8 @@ import {
   BiSolidMegaphone,
   BiLogoMediumOld,
   BiSolidCategoryAlt,
+  BiMessageAlt,
+  BiSolidMessageAlt,
 } from "react-icons/bi";
 import { Button } from "../ui/button";
 
@@ -141,6 +143,55 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 
              
 
+             
+
+              <SidebarLinkGroup
+                activeCondition={
+                  pathname === "/correspondence" || pathname.includes("visual")
+                }
+              >
+                {(handleClick, open) => {
+                  return (
+                    <React.Fragment>
+                      <Link
+                        href="#"
+                        className={`group no-underline relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-white duration-300 ease-in-out hover:bg-green-800  ${
+                          (pathname === "/visual" ||
+                            pathname.includes("visual")) &&
+                          "bg-green-700 "
+                        }`}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          sidebarExpanded
+                            ? handleClick()
+                            : setSidebarExpanded(true);
+                        }}
+                      >
+                        <BiSolidMessageAlt className="h-5 w-5 text-white" />
+                        Feedback &amp; Messages
+                        <BiChevronDown
+                          className={`absolute right-4 top-1/2 h-6 w-6 -translate-y-1/2 fill-current ${
+                            open && "rotate-180"
+                          }`}
+                        />
+                      </Link>
+                      <div
+                        className={`translate transform overflow-hidden ${
+                          !open && "hidden"
+                        }`}
+                      >
+                        <ul className="mb-5.5 mt-2 flex flex-col gap-2.5 pl-6">
+                        <li>
+                <Link
+                  href="/admin/message"
+                  className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-white no-underline duration-300 ease-in-out hover:bg-green-800 ${
+                    pathname.includes("message") && "bg-green-700 text-white"
+                  }`}
+                >
+                  <BiSolidMessage className="h-5 w-5" />
+                  Message Center
+                </Link>
+              </li>
               <li>
                 <Link
                   href="/admin/enquiry"
@@ -152,6 +203,12 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                   Enquiry
                 </Link>
               </li>
+                        </ul>
+                      </div>
+                    </React.Fragment>
+                  );
+                }}
+              </SidebarLinkGroup>
               <li>
                 <Link
                   href="/admin/category"
@@ -407,17 +464,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                         }`}
                       >
                         <ul className="mb-5.5 mt-2 flex flex-col gap-2.5 pl-6">
-                          <li>
-                            <Link
-                              href="/admin/user"
-                              className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-white no-underline duration-300 ease-in-out hover:bg-green-800 py-2  ${
-                                pathname === "/admin/user" &&
-                                "text-white bg-green-700"
-                              }`}
-                            >
-                              User Setup
-                            </Link>
-                          </li>
+                        
                           <li>
                             <Link
                               href="/admin/smtp"
@@ -429,28 +476,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                               SMTP Setup
                             </Link>
                           </li>
-                          <li>
-                            <Link
-                              href="/admin/footer"
-                              className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-white no-underline duration-300 ease-in-out hover:bg-green-800 py-2  ${
-                                pathname === "/admin/footer" &&
-                                "text-white bg-green-700"
-                              }`}
-                            >
-                              Footer setup
-                            </Link>
-                          </li>
-                          <li>
-                            <Link
-                              href="/admin/topbar"
-                              className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-white no-underline duration-300 ease-in-out hover:bg-green-800 py-2  ${
-                                pathname === "/admin/topbar" &&
-                                "text-white bg-green-700"
-                              }`}
-                            >
-                              Top Bar setup
-                            </Link>
-                          </li>
+                       
                         </ul>
                       </div>
                     </React.Fragment>

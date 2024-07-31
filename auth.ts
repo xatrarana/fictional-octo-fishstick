@@ -13,22 +13,20 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
     signIn: "/auth/login",
     error: "/auth/error",
   },
-  trustHost:true,
+  trustHost: true,
 
   //callbacks 
   callbacks: {
+    async jwt({ token,user }) {
+      
+      return token
+    },
     async session({ session, token }) {
       if (token.sub && session.user) {
         session.user.id = token.sub
       }
-
-     
       return session;
-    },
-    async jwt({ token }) {
-      token.exp = Math.floor(Date.now() / 1000) + 10 * 60;
-      return token
-    },
+    }
   }
 })
 

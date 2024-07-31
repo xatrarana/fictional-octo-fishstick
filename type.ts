@@ -31,6 +31,16 @@ export interface Position {
   }
   
 
+  export interface Message {
+    id: string;
+    memberId: string;
+    message: string;
+    status: boolean;
+    createdAt: Date;
+    updatedAt: Date;
+    member: Member;
+  }
+
 
   export interface SMTPConnection {
       servername: string | undefined;
@@ -42,3 +52,22 @@ export interface Position {
       from: string | undefined;
 
   }
+
+
+  export interface Gallery {
+    id: string;
+    title: string;
+    slug: string;
+    images?: IImage[];
+    createdAt: Date;
+    updatedAt: Date;
+  }
+  
+  export interface IImage {
+    id: string;
+    url: string;
+    altText?: string;
+    createdAt: Date;
+    updatedAt: Date;
+  }
+  

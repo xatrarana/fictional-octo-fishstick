@@ -59,25 +59,28 @@ const SchemeDetailsWrapperSite: React.FC<SchemeDetailsProps> = async ({
               <CardTitle>{data.category?.name}</CardTitle>
             </CardHeader>
             <div className="space-y-5 p-2">
-              {data.category.categoryImageUrl && (
+             <div className="flex items-center justify-center">
+             {data.category.categoryImageUrl && (
                 <Image
-                  className="w-full rounded-md object-cover h-[60lvh]"
+                  className=" rounded-md object-fit object-center"
                   src={data.category.categoryImageUrl}
                   alt={data.category.name}
-                  width={200}
+                  width={500}
                   height={200}
+                  objectFit="center"
                 />
               )}
 
               {!data.category.categoryImageUrl && (
                 <Image
-                  className="w-full rounded-md object-cover h-[60lvh]"
+                  className=" rounded-md object-fit object-center"
                   src={"/image-not-found.jpg"}
                   alt={data.category.name}
-                  width={900}
+                  width={400}
                   height={200}
                 />
               )}
+             </div>
               <div className="mt-4">
                 {data.category.text && (
                   <DangerouslySetInnerHTML

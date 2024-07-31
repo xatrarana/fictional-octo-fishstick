@@ -1,32 +1,70 @@
 import React from "react";
-import logo from "@/public/logo/triLogo.webp";
 import Image from "next/image";
 import ResponsiveBar from "./responsive-bar";
 import { GetActiveFlashNews } from "@/actions/flash-news";
 import { getGroupsByOrder } from "@/data/group";
 import Link from "next/link";
 import { getCategories } from "@/actions/category";
+import { getChairmanDetails } from "@/data/member";
+import { GetDetailsData } from "@/data/org";
+import { BiSolidEnvelope, BiSolidMap, BiSolidPhoneCall } from "react-icons/bi";
 const NavBar = async () => {
   const flashNews = await GetActiveFlashNews();
+
+  const org = await GetDetailsData();
+
   const groups = await getGroupsByOrder();
 
   const response = await getCategories();
 
-
-
+  const chairman = await getChairmanDetails();
 
   return (
-    <header className=" px-1  shadow-sm ">
+    <header className=" shadow-sm ">
+      <div className=" min-h-12 bg-green-800 flex flex-col md:flex-row  gap-y-2 p-2 md:gap-x-5  md:items-center justify-start md:justify-end pr-5">
+        {org && (
+          <div className="flex items-center  gap-x-5">
+            <BiSolidEnvelope className="inline-block text-white" />
+            <Link href={`mailto:${org.email}`} className="text-white text-sm">
+              {org.email}
+            </Link>
+          </div>
+        )}
+        {org && (
+          <div className="flex items-center  gap-x-5">
+            <BiSolidMap className="inline-block text-white" />
+            <span className="text-white text-sm">{org.address}</span>
+          </div>
+        )}
+        {org && (
+          <div className="flex items-center  gap-x-5">
+            <BiSolidPhoneCall className="inline-block text-white" />
+            <span className="text-white text-sm">{org.landline}</span>
+          </div>
+        )}
+      </div>
       <div className="max-w-7xl mx-auto mt-2 flex items-center justify-between relative">
-        <Link href={'/'} className=" flex items-center">
-          <Image
-            src={logo}
-            alt="Logo"
-            className="object-cover rounded-sm"
-            width={320}
-            height={100}
-            priority
-          />
+        <Link href={"/"} className=" flex items-center">
+          {org?.primaryLogoUrl && (
+            <Image
+              src={org.primaryLogoUrl}
+              alt="Logo"
+              className="object-cover rounded-sm hidden lg:inline-block"
+              width={320}
+              height={100}
+              priority
+            />
+          )}
+          {org?.secondaryLogoUrl && (
+            <Image
+              src={org.secondaryLogoUrl}
+              alt="Logo"
+              className="object-cover rounded-sm lg:hidden p-2"
+              width={50}
+              height={50}
+              priority
+            />
+          )}
         </Link>
         <ResponsiveBar groups={groups} categories={response.categories} />
       </div>

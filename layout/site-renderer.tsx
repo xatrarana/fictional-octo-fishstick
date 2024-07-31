@@ -33,19 +33,21 @@ const SiteRender = async () => {
 
       </section>
       <Separator/>
-      <section className="space-y-3">
+      <section className="space-y-6">
         <OrgIntro />
 
       </section>
       <Separator/>
-      <section className="space-y-3">
+      <section className="space-y-6">
         <ServicesSection />
       </section>
+      <Separator/>
       <section className="space-y-3">
-        {/* <GallerySection /> */}
+        <GallerySection />
       </section>
-      <section className="space-y-3">
-        {/* <NoticeSection /> */}
+      <Separator/>
+      <section className="space-y-6">
+        <NoticeSection />
       </section>
     </SiteLayout>
   );

@@ -135,7 +135,6 @@ const BannerItems = () => {
               <TableCell>{banner.title}</TableCell>
               <TableCell>{banner.slug}</TableCell>
               <TableCell className="text-right flex gap-x-5 justify-end">
-                <Button>Edit</Button>
                 <Button variant={"destructive"} onClick={() => onClickDeleteBanner(banner.id)}>Delete</Button>
               </TableCell>
             </TableRow>

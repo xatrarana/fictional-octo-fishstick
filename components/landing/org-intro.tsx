@@ -13,7 +13,7 @@ const OrgIntro = async () => {
     <div className="grid grid-cols-1 md:lg:grid-cols-3 gap-x-3 gap-y-4 items-center">
       <Card className="shadow-none border-none col-span-2">
         <CardHeader>
-          <CardTitle className="text-xl text-center md:text-3xl lg:text-4xl font-semibold">
+          <CardTitle className="text-xl text-green-800 text-center md:text-3xl lg:text-4xl font-semibold">
             {data?.name}
           </CardTitle>
         </CardHeader>
@@ -23,7 +23,7 @@ const OrgIntro = async () => {
         />
       </Card>
       <div>
-        <Card className="flex flex-col items-center justify-center p-1 shadow-sm border-none">
+        <Card className="flex flex-col items-center justify-center p-1 shadow-none border-none">
           <CardContent>
           {chairman && (
               <Image
@@ -39,7 +39,7 @@ const OrgIntro = async () => {
           </CardContent>
           <CardFooter className="flex flex-col gap-y-3">  
               <CardTitle>{chairman?.name}</CardTitle>
-              <CardDescription className="text-muted-foreground">{chairman?.position.name}</CardDescription>
+              <CardDescription className="text-green-600">{chairman?.position.name}</CardDescription>
           </CardFooter>
         </Card>
       </div>

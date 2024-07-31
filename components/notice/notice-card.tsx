@@ -31,7 +31,7 @@ const NoticeCard: React.FC<NoticeCardProps> = ({
     <Card className={cn(["bg-green-50", className])}>
       <CardHeader>
         <Link href={`/notices/${notice.id}/details`}>
-          <CardTitle className="text-green-700 text-xl">{notice.title}</CardTitle>
+          <CardTitle className="text-green-700 text-md md:text-xl">{notice.title}</CardTitle>
         </Link>
 
         <CardFooter className="">

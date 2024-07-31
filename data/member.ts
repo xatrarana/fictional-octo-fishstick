@@ -7,7 +7,6 @@ export const getChairmanDetails = async () => {
 
   return chairman;
   } catch (error) {
-    console.error("Error fetching chairman details:", error);
-    return { error: 'Something went wrong. Please try again.' };
+    return null;
   }
 };

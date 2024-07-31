@@ -1,38 +1,14 @@
-export const aboutComponents: { title: string; href: string; }[] = [
-    {
-      title: "हाम्रो परिचय",
-      href: "/about",
-    
-    },
-    {
-      title: "निर्देशक मण्डल",
-      href: "/team-types/board-of-directors",
-     
-    },
-    {
-      title: "लेखा समिति",
-      href: "/team-types/accounting-committee",
-     
-    },
-    {
-      title: "अध्यक्षबाट सन्देश",
-      href: "/message/chairman-message",
-    },
-    
-  ]
-
 
   export const useFulLinks = [
     { name: "गृह", href: "/" },
     { name: "हाम्रो बारेमा", href: "/about" },
-    { name: "सञ्चालक समिति", href: "/about/teams" },
-    { name: "अध्यक्षबाट सन्देश", href: "/message/chairman-message" },
+    { name: "अध्यक्षबाट सन्देश", href: "/message/chairman" },
 
 ]
 
 export const otherLinks = [
     { name: "सम्पर्क", href: "/contact" },
-    { name: "सुचना", href: "/notice" },
+    { name: "सुचना", href: "/notices" },
     { name: "ग्यालरी", href: "/gallery" },
 ]
 

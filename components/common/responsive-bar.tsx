@@ -65,11 +65,14 @@ const ResponsiveBar = ({ groups, categories }: ResponsiveBarProps) => {
             </Link>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            {/* <NavigationMenuTrigger>हाम्रा सेवाहरु</NavigationMenuTrigger> */}
             <NavigationMenuTrigger>हाम्रो बारेमा</NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className="grid gap-3 p-1 min-w-[200px]">
                 <ListItem title="हाम्रो परिचय" href="/about"></ListItem>
+                <ListItem
+                  title="अध्यक्षबाट सन्देश"
+                  href="/message/chairman"
+                ></ListItem>
                 {groups.map((group) => (
                   <ListItem
                     key={group.id}
@@ -84,11 +87,6 @@ const ResponsiveBar = ({ groups, categories }: ResponsiveBarProps) => {
             <NavigationMenuTrigger>हाम्रा सेवाहरु</NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className="grid gap-3 p-1 min-w-[300px]">
-                <ListItem title="हाम्रो परिचय" href="/about"></ListItem>
-                <ListItem
-                  title="Message from Chairman"
-                  href="/message/chairman"
-                ></ListItem>
                 {categories.map((category) => (
                   <ListItem
                     key={category.id}

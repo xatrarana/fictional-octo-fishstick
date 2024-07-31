@@ -11,8 +11,8 @@ const ServicesSection = async () => {
    <div className='space-y-5'>
     {
       services && services.categories && services.categories.length > 0 && (
-        <div className='bg-green-800 text-white py-3 rounded-sm'>
-      <h1 className='txet-xl ml-5  md:lg:text-2xl font-semibold'>Our Services</h1>
+        <div className=' text-slate-900 py-2 rounded-sm'>
+      <h1 className='txet-xl ml-5  md:lg:text-2xl font-semibold'>Services</h1>
     </div>
       )
     }
@@ -39,7 +39,7 @@ const ServicesSection = async () => {
             className='rounded-md object-cover'
           />
         </CardContent>
-        <Content className='text-justify p-3 hover:text-muted-foreground' content={service?.text?.slice(0,170) + " ..." as string } />
+        <Content className='text-justify bg-green-50 p-3 hover:text-muted-foreground' content={service?.text?.slice(0,170) + " ..." as string } />
       </Card>
     </Link>
   ))
