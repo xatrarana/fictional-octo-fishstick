@@ -31,6 +31,7 @@ import {
   BiSolidMessageAlt,
 } from "react-icons/bi";
 import { Button } from "../ui/button";
+import { useCurrentUser } from "@/hooks/use-current-user";
 
 interface SidebarProps {
   sidebarOpen: boolean;
@@ -41,6 +42,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   const pathname = usePathname();
   const trigger = useRef<any>(null);
   const sidebar = useRef<any>(null);
+  const user  = useCurrentUser();
 
   let storedSidebarExpanded = "true";
 
@@ -192,17 +194,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                   Message Center
                 </Link>
               </li>
-              <li>
-                <Link
-                  href="/admin/enquiry"
-                  className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-white no-underline duration-300 ease-in-out hover:bg-green-800 ${
-                    pathname.includes("calender") && "bg-green-700 text-white"
-                  }`}
-                >
-                  <BiSolidMessage className="h-5 w-5" />
-                  Enquiry
-                </Link>
-              </li>
+          
                         </ul>
                       </div>
                     </React.Fragment>
@@ -465,7 +457,10 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                       >
                         <ul className="mb-5.5 mt-2 flex flex-col gap-2.5 pl-6">
                         
-                          <li>
+                         {
+                          user && user.roleId === 1 && (
+                          <>
+                            <li>
                             <Link
                               href="/admin/smtp"
                               className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-white no-underline duration-300 ease-in-out hover:bg-green-800 py-2  ${
@@ -476,6 +471,20 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                               SMTP Setup
                             </Link>
                           </li>
+                          <li>
+                            <Link
+                              href="/admin/user"
+                              className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-white no-underline duration-300 ease-in-out hover:bg-green-800 py-2  ${
+                                pathname === "/admin/user" &&
+                                "text-white bg-green-700"
+                              }`}
+                            >
+                              user Setup
+                            </Link>
+                          </li>
+                          </>
+                          )
+                         }
                        
                         </ul>
                       </div>

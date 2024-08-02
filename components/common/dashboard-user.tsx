@@ -19,6 +19,7 @@ import { ChangePasswordField } from "../user/change-password";
 import UserProfile from "../user/user-profile";
 import { logout } from "@/actions/logout";
 import { useCurrentUser } from "@/hooks/use-current-user";
+import { useRouter } from "next/navigation";
 
 const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -105,11 +106,13 @@ export default DropdownUser;
 export function AlertLogoutDialog() {
 
   // cosnt session = useSession() from @next-auth/react
+  const router = useRouter()
 
     const onClick = async () =>{
        
       // or we can do using the signout from @next-auth/react
         await logout()
+        router.replace("/auth/login")
     }
      return (
       <AlertDialog>

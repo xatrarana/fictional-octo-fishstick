@@ -188,8 +188,8 @@ CREATE TABLE `Message` (
 CREATE TABLE `Gallery` (
     `id` VARCHAR(191) NOT NULL,
     `title` VARCHAR(255) NOT NULL,
+    `path` VARCHAR(191) NOT NULL,
     `slug` VARCHAR(255) NOT NULL,
-    `description` TEXT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 
@@ -202,7 +202,6 @@ CREATE TABLE `Image` (
     `id` VARCHAR(191) NOT NULL,
     `url` TEXT NOT NULL,
     `altText` VARCHAR(255) NULL,
-    `galleryId` VARCHAR(191) NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 
@@ -264,9 +263,6 @@ ALTER TABLE `Member` ADD CONSTRAINT `Member_positionId_fkey` FOREIGN KEY (`posit
 
 -- AddForeignKey
 ALTER TABLE `Message` ADD CONSTRAINT `Message_memberId_fkey` FOREIGN KEY (`memberId`) REFERENCES `Member`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `Image` ADD CONSTRAINT `Image_galleryId_fkey` FOREIGN KEY (`galleryId`) REFERENCES `Gallery`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `Service` ADD CONSTRAINT `Service_categoryId_fkey` FOREIGN KEY (`categoryId`) REFERENCES `Category`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;

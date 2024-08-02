@@ -71,3 +71,24 @@ export interface Position {
     updatedAt: Date;
   }
   
+
+  // Interfaces for TypeScript
+
+export interface User {
+  id: string;
+  name?: string;
+  username?: string;
+  email: string;
+  passwordHash?: string;
+  image?: string;
+  roleId: number;
+  Role: Role;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface Role {
+  id: number;
+  name: string;
+  users?: User[];
+}

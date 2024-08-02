@@ -16,6 +16,11 @@ export const publicRoutes = [
     // "/api/config/smtp",
 ]
 
+export const adminSettingsRoutes = [
+    "/admin/settings",
+    "/admin/smtp",
+    "/admin/users",
+]
 /**
  * Array of routes that are requried authentication
  * These routes require authentication

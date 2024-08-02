@@ -63,7 +63,6 @@ type MemberFormProps = {
 };
 export const MemberForm: React.FC<MemberFormProps> = ({ edit, editData }) => {
 
-  console.log(editData);
   const [error, setError] = useState<string | undefined>(undefined);
   const [success, setSuccess] = useState<string | undefined>(undefined);
   const [isPending, setIsPending] = useState(false);

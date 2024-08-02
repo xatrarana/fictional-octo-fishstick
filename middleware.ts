@@ -5,6 +5,7 @@ import {
     publicRoutes,
     DEFAULT_LOGIN_REDIRECT_URL,
     authRoutes,
+    adminSettingsRoutes,
 
 
 } from "@/route"
@@ -15,6 +16,15 @@ const { auth } = NextAuth(authConfig);
 export default auth((req) =>{
     const {nextUrl} = req;
     const isAutenticated = !!req.auth;
+
+
+    const isAdminSettingsRoute = adminSettingsRoutes.includes(nextUrl.pathname);
+
+    if(isAdminSettingsRoute && !isAutenticated){
+        return Response.redirect(new URL("/auth/login",nextUrl));
+    }
+
+    if(isAdminSettingsRoute && req.auth?.user.roleId !== 1) return Response.redirect(new URL("/auth/login",nextUrl));
 
     const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
 

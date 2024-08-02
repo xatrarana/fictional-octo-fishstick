@@ -45,15 +45,15 @@ async function main() {
 
 
   const smtp = await client.smtp.upsert({
-    where: {username:'atdevaiz@gmail.com'},
+    where: {username:'alert@sysastra.com'},
     update:{},
     create: {
-      servername:'smtp.gmail.com',
+      servername:'mail.sysastra.com',
       port:465,
-      username:'atdevaiz@gmail.com',
-      password:'ywddgupyqevinfqc',
-      fromEmail:'atdevaiz@gmail.com',
-      toEmail:'dev.chhatrarana@gmail.com',
+      username:'alert@sysastra.com',
+      password:'qqQhXDcN8xx6',
+      fromEmail:'alert@sysastra.com',
+      toEmail:'info@tri-jyoti.coop.np',
       displayname:'Trijyoti Credits & Cooperative Ltd.',
     }
   })

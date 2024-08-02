@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /auth/login
+Disallow: /admin/dashboard
+Disallow: /admin/

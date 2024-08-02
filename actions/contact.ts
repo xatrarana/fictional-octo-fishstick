@@ -1,4 +1,5 @@
 'use server';
+import { testInquiryTemplate } from '@/constant/test-template';
 import { getFirstSmtpConnection } from '@/data/smtp';
 import { db } from '@/lib/db';
 import { sendMail } from '@/lib/mail';
@@ -17,13 +18,20 @@ export async function submitEnquiry(values: zod.infer<typeof contactFormSchema>)
             }
         })
 
+     const data =    {
+            name: enquiry.name,
+            email: enquiry.email,
+            subject: enquiry.subject,
+            message: enquiry.message
+        }
+
         const connection = await getFirstSmtpConnection();
-        
+        const mail = testInquiryTemplate(data);
         await sendMail(
-            connection?.to ?? "",
+            connection?.to ?? process.env.SMTP_TO_EMAIL as string,
             enquiry.email,
-            enquiry.subject,
-            enquiry.message,
+            `Enquiry Mail - ${enquiry.subject}`,
+            mail,
         )
 
         return {success: "Your enquiry has been submitted"};

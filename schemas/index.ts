@@ -215,3 +215,46 @@ export const useUpdateSchema = z.object({
   email: z.string().email("Invalid email address").optional(),
   username: z.string().min(1, "Username is required").optional(),
 })
+
+
+
+
+export const RoleSchema = z.object({
+  id: z.number().int(),
+  name: z.string(),
+  users: z.array(z.object({
+    id: z.string(),
+    name: z.string().optional(),
+    username: z.string().optional(),
+    email: z.string(),
+    passwordHash: z.string().optional(),
+    image: z.string().optional(),
+    roleId: z.number().int(),
+    Role: z.any(), 
+    createdAt: z.date(),
+    updatedAt: z.date(),
+  })).optional()
+});
+
+export const UserSchema = z.object({
+  id: z.string(),
+  name: z.string().optional(),
+  username: z.string().optional(),
+  email: z.string(),
+  passwordHash: z.string().optional(),
+  image: z.string().optional(),
+  roleId: z.number().int(),
+  Role: RoleSchema,
+  createdAt: z.date(),
+  updatedAt: z.date(),
+});
+
+export const RegistrationSchema = z.object({
+  name: z.string(),
+  username: z.string(),
+  email: z.string().email(),
+  password: z.string().min(6, "Password must be at least 6 characters long"),
+  confirmPassword: z.string().min(6, "Confirm password must be at least 6 characters long"),
+  image: z.string().optional(),
+  roleId: z.string(),
+});

@@ -43,6 +43,10 @@ import { updateUser } from "@/actions/user";
         email: emailRef.current?.value
       })
 
+      if(response.error) throw new Error(response.error)
+      
+      if(response.success) setSuccess(response.success)
+
 
     } catch (error) {
       if(error instanceof Error){
@@ -74,25 +78,26 @@ import { updateUser } from "@/actions/user";
             <Label htmlFor="name" className="text-right">
               Name
             </Label>
-            <Input ref={nameRef} id="name" value={user?.name || ""} className="col-span-3" />
+            <Input ref={nameRef} id="name" defaultValue={user?.name || ""} className="col-span-3" />
           </div>
-          {/* <div className="grid grid-cols-1 md:grid-cols-4 items-center gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-4 items-center gap-4">
             <Label htmlFor="username" className="text-right">
               Username
             </Label>
-            <Input ref={usernameRef} id="username" value={user.username} className="col-span-3" />
-          </div> */}
+            <Input ref={usernameRef} id="username" defaultValue={user?.username || ""} className="col-span-3" />
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-4 items-center gap-4">
             <Label htmlFor="email" className="text-right">
               email
             </Label>
-            <Input ref={emailRef} id="email" value="@peduarte" className="col-span-3" />
+            <Input ref={emailRef} id="email" defaultValue={user?.email || ""} className="col-span-3" />
           </div>
         </div>
         <SheetFooter>
           <SheetClose asChild>
-            <Button className="bg-green-800 hover:bg-green-700" onClick={handleSubmit} >Save changes</Button>
+            <Button variant={"outline"} >Close</Button>
           </SheetClose>
+            <Button className="bg-green-800 hover:bg-green-700" onClick={handleSubmit} >Save changes</Button>
         </SheetFooter>
       </SheetContent>
     </Sheet>
