@@ -12,8 +12,6 @@ import {
   BiLogoInstagramAlt,
   BiLogoLinkedinSquare,
 } from "react-icons/bi";
-import samll from "@/public/logo/small.webp";
-import qr from "@/public/logo/qr.webp";
 import { otherLinks, useFulLinks } from "@/constant/nav-components";
 import {
   Tooltip,
@@ -49,12 +47,13 @@ const Footer = async () => {
             } w-full `}
           >
             {data?.secondaryLogoUrl && (
-              <Image
+              /* eslint-disable-next-line */
+              <img
                 width={70}
                 height={70}
                 loading="lazy"
                 className="invert brightness-0"
-                src={data.secondaryLogoUrl || samll}
+                src={data.secondaryLogoUrl}
                 alt={data?.name}
               />
             )}
@@ -216,7 +215,8 @@ const Footer = async () => {
               </h3>
             {
               data?.paymentLogoUrl && (
-                <Image
+                /* eslint-disable-next-line */
+                <img
                   src={data.paymentLogoUrl}
                   alt="payment"
                   width={100}

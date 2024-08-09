@@ -143,7 +143,8 @@ const BannerForm = () => {
         <div className="space-y-4">
           {imagePreview && (
             <div className="mt-4">
-              <Image src={imagePreview} alt="Image Preview" width={100} height={100} className="object-cover w-full rounded-md" />
+              {/* eslint-disable-next-line */}
+              <img src={imagePreview} alt="Image Preview" width={100} height={100} className="object-cover w-full rounded-md" />
             </div>
           )}
         </div>

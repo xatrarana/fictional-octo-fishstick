@@ -30,7 +30,8 @@ const ServicesSection = async () => {
           <CardTitle className='text-green-950'>{service?.name}</CardTitle>
         </CardHeader>
         <CardContent className='flex items-center justify-center'>
-          <Image
+          {/* eslint-disable-next-line */}
+          <img
             src={service?.categoryImageUrl || '/image-not-found.jpg'}
             alt={service?.name}
             width={100}

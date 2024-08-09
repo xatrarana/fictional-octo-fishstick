@@ -59,7 +59,8 @@ const MemberList = ({ members,url,org }: MemberListProps) => {
         {chairman && (
           <div className="mb-8">
             <div className="flex flex-col items-center">
-              <Image
+              {/* eslint-disable-next-line */}
+              <img
                 src={(chairman.avatarUrl as string) || "/user.png"}
                 alt={chairman.name}
                 width={150}
@@ -76,7 +77,8 @@ const MemberList = ({ members,url,org }: MemberListProps) => {
         <div className="grid grid-cols-1 md:lg:grid-cols-3  p-1 gap-4  md:lg:gap-x-16">
           {otherMembers.map((member, index) => (
             <div key={index} className="flex flex-col items-center">
-              <Image
+              {/* eslint-disable-next-line */}
+              <img
                 src={(member.avatarUrl as string) || "/user.png"}
                 width={150}
                 height={100}

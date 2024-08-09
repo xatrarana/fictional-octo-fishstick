@@ -82,14 +82,16 @@ const NoticeDetails = async ({ params }: { params: { id: string } }) => {
                   <BiSolidDownload className="w-6 h-6 text-white font-bold flex items-center " />
                   Download
                 </Link>
-                <Image
+                <Link target="_blank" href={notice.fileUrl as string}>
+              {/* eslint-disable-next-line */}
+                <img
                   className="rounded-md"
-                  layout="responsive"
                   src={notice.fileUrl as string}
                   width={200}
                   height={200}
                   alt={notice.title}
                 />
+                </Link>
               </CardContent>
 
               <CardFooter>

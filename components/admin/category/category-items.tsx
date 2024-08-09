@@ -127,7 +127,8 @@ const CategoryItems = () => {
               <TableCell className="font-medium">{index + 1}</TableCell>
             <TableCell>
             {
-              category.categoryImageUrl && <Image src={category.categoryImageUrl} alt="avatar" width={40} height={40} className="rounded-md"/>
+              /* eslint-disable-next-line */
+              category.categoryImageUrl && <img src={category.categoryImageUrl} alt="avatar" width={40} height={40} className="rounded-md"/>
             }
             {
               !category.categoryImageUrl && <Image src="/image-not-found.jpg" alt="Image not Found" width={40} height={40} className="rounded-md"/>

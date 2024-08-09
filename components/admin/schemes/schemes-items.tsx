@@ -116,7 +116,8 @@ const SchemesItems = ({categoryId}:{categoryId:string}) => {
               <TableCell className="font-medium">{index + 1}</TableCell>
             <TableCell>
             {
-              service.imageUrl && <Image src={service.imageUrl} alt="avatar" width={40} height={40} className="rounded-md"/>
+              /* eslint-disable-next-line */
+              service.imageUrl && <img src={service.imageUrl} alt="avatar" width={40} height={40} className="rounded-md"/>
             }
             {
               !service.imageUrl && <Image src="/image-not-found.jpg" alt="Image not found" width={40} height={40} className="rounded-md"/>

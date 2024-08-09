@@ -384,7 +384,8 @@ const OrganizationForm = ({ data }: OrganizationFormProps) => {
               <div className="space-y-6 ">
                 {priLogoUrl && (
                   <div className="mt-4 rounded-sm p-1 flex justify-center">
-                    <Image
+                    {/* eslint-disable-next-line */}
+                    <img
                       height={100}
                       width={200}
                       src={priLogoUrl as string}
@@ -412,7 +413,8 @@ const OrganizationForm = ({ data }: OrganizationFormProps) => {
               <div className="space-y-6 ">
                 {secLogoUrl && (
                   <div className="mt-4 rounded-sm p-1 flex justify-center">
-                    <Image
+                    {/* eslint-disable-next-line */}
+                    <img
                       height={100}
                       width={200}
                       src={secLogoUrl as string}
@@ -605,7 +607,8 @@ const OrganizationForm = ({ data }: OrganizationFormProps) => {
               <div className="space-y-6 ">
                 {paymentLogoUrl && (
                   <div className="mt-4 rounded-sm p-1 flex justify-center">
-                    <Image
+                    {/* eslint-disable-next-line */}
+                    <img
                       height={100}
                       width={200}
                       src={paymentLogoUrl as string}

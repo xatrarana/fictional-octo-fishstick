@@ -26,13 +26,13 @@ const OrgIntro = async () => {
         <Card className="flex flex-col items-center justify-center p-1 shadow-none border-none">
           <CardContent>
           {chairman && (
-              <Image
+          /* eslint-disable-next-line */
+              <img
                 src={chairman.avatarUrl || "/user.png"}
                 alt={chairman.name || "Chairman"}
-                width={300}
+                width={250}
                 height={200}
                 className="object-cover rounded-full "
-                layout="responsive"
               />
             )}
 

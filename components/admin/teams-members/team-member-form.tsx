@@ -326,7 +326,8 @@ export const MemberForm: React.FC<MemberFormProps> = ({ edit, editData }) => {
           <div className="space-y-6 ">
             {selectedImage && (
               <div className="mt-4 rounded-sm p-1 flex justify-center">
-                <Image
+                {/* eslint-disable-next-line */}
+                <img
                   height={100}
                   width={200}
                   src={selectedImage}

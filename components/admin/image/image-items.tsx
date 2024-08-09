@@ -121,7 +121,8 @@ const ImageItems = () => {
               <TableCell>
                 <HoverCard>
                   <HoverCardTrigger>
-                    <Image
+                    {/* eslint-disable-next-line */}
+                    <img
                       src={image.url}
                       alt={image.altText || 'Image'}
                       width={100}
@@ -129,7 +130,8 @@ const ImageItems = () => {
                     />
                   </HoverCardTrigger>
                   <HoverCardContent>
-                    <Image
+                    {/* eslint-disable-next-line */}
+                    <img
                       src={image.url}
                       alt={image?.altText || 'Image'}
                       className="w-auto h-auto"

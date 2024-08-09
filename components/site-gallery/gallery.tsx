@@ -1,6 +1,5 @@
 import React from 'react'
 import 'photoswipe/style.css';
-import Image from 'next/image';
 
 
 const GalleryComp = ({images}:any) => {
@@ -11,7 +10,8 @@ const GalleryComp = ({images}:any) => {
     {images.map((item:any, index:number) => (
       <div key={index} className="relative flex rounded-sm  justify-center overflow-hidden group">
         <a href={item.original} className='rounded-sm' target="_blank" rel="noopener noreferrer">
-          <Image
+          {/* eslint-disable-next-line */}
+          <img
             width={250}
             height={250}
             src={item.original}

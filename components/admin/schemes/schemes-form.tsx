@@ -304,7 +304,8 @@ export const SchemeForm: React.FC<SchemeFormProps> = ({
           />
           {ImageUrl && (
             <div className="mt-4 rounded-sm p-1 flex justify-center">
-              <Image
+              {/* eslint-disable-next-line */}
+              <img
                 height={100}
                 width={200}
                 src={ImageUrl as string}

@@ -245,7 +245,8 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
           />
           {categoryImageUrl && (
             <div className="mt-4 rounded-sm p-1 flex justify-center">
-              <Image
+              {/* eslint-disable-next-line */}
+              <img
                 height={100}
                 width={200}
                 src={categoryImageUrl as string}

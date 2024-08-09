@@ -39,8 +39,9 @@ const RelatedScheme = async ({ sid }: RelatedSchemeProps) => {
             </CardHeader>
             <CardContent>
               {service.imageUrl && (
-                <Image
-                  className="w-full rounded-md object-cover  h-[30lvh]"
+                /* eslint-disable-next-line */
+                <img
+                  className="rounded-md object-cover w-full h-36"
                   src={service.imageUrl}
                   alt={service.name}
                   width={200}
@@ -50,7 +51,7 @@ const RelatedScheme = async ({ sid }: RelatedSchemeProps) => {
 
               {!service.imageUrl && (
                 <Image
-                  className="w-full rounded-md object-cover  h-[30lvh]"
+                  className="w-full rounded-md object-cover  h-36"
                   src={"/image-not-found.jpg"}
                   alt={service.name}
                   width={200}

@@ -122,7 +122,8 @@ export const ImageForm = () => {
           <div className="space-y-4">
             {imagePreview && (
               <div className="mt-4 flex items-center justify-center">
-                <Image src={imagePreview} alt="Image Preview" width={200} height={100} className="object-cover rounded-md" />
+                {/* eslint-disable-next-line */}
+                <img src={imagePreview} alt="Image Preview" width={200} height={100} className="object-cover rounded-md" />
               </div>
             )}
           </div>

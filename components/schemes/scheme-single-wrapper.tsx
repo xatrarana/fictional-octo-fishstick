@@ -61,13 +61,13 @@ const SchemeDetailsWrapperSite: React.FC<SchemeDetailsProps> = async ({
             <div className="space-y-5 p-2">
              <div className="flex items-center justify-center">
              {data.category.categoryImageUrl && (
-                <Image
-                  className=" rounded-md object-fit object-center"
+              /* eslint-disable-next-line */
+                <img
+                  className="w-full h-auto md:lg:h-[60vh] rounded-md object-cover object-center"
                   src={data.category.categoryImageUrl}
                   alt={data.category.name}
-                  width={500}
+                  width={300}
                   height={200}
-                  objectFit="center"
                 />
               )}
 

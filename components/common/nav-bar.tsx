@@ -46,23 +46,23 @@ const NavBar = async () => {
       <div className="max-w-7xl mx-auto mt-2 flex items-center justify-between relative">
         <Link href={"/"} className=" flex items-center">
           {org?.primaryLogoUrl && (
-            <Image
+            /* eslint-disable-next-line */
+            <img
               src={org.primaryLogoUrl}
               alt="Logo"
               className="object-cover rounded-sm hidden lg:inline-block"
               width={320}
               height={100}
-              priority
             />
           )}
           {org?.secondaryLogoUrl && (
-            <Image
+            /* eslint-disable-next-line */
+            <img
               src={org.secondaryLogoUrl}
               alt="Logo"
               className="object-cover rounded-sm lg:hidden p-2"
               width={50}
               height={50}
-              priority
             />
           )}
         </Link>

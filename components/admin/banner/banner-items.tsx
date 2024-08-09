@@ -114,7 +114,8 @@ const BannerItems = () => {
               <TableCell>
                 <HoverCard>
                   <HoverCardTrigger>
-                    <Image
+                    {/* eslint-disable-next-line */}
+                    <img
                       src={banner.imageUrl}
                       alt={banner.title}
                       width={100}
@@ -122,7 +123,8 @@ const BannerItems = () => {
                     />
                   </HoverCardTrigger>
                   <HoverCardContent>
-                    <Image
+                    {/* eslint-disable-next-line */}
+                    <img
                       src={banner.imageUrl}
                       alt={banner.title}
                       className="w-auto h-auto"

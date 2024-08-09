@@ -22,7 +22,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
           {slides && slides.length > 0 && slides?.map((slide,index) => (
             <div className="embla__slide" key={index}>
               <div className="embla__slide__number relative">
-                {/* @ts-ignore */}
+                {/* eslint-disable-next-line */}
                 <img className='rounded-md' src={slide.imageUrl} loading='eager' alt={slide.title} />
                 <div className='absolute bottom-3 text-white'>
                     <h3 className='text-sm'>{slide.title}</h3>

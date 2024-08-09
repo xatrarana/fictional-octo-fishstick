@@ -239,7 +239,8 @@ export const NoticeForm: React.FC<NoticeFormProps> = ({ edit, editData }) => {
           />
           {fileUrl && fileType === "image" && (
             <div className="mt-4 rounded-sm p-1 flex justify-center">
-              <Image
+              {/* eslint-disable-next-line */}
+              <img
                 height={100}
                 width={200}
                 src={fileUrl as string}

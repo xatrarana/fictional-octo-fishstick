@@ -61,8 +61,9 @@ const ServiceDetailsWrapper: React.FC<ServiceDetailsProps> = async ({
             </CardHeader>
             <div className="space-y-5 p-2">
               {data.service.imageUrl && (
-                <Image
-                  className="w-full rounded-md object-cover h-[60lvh]"
+                /* eslint-disable-next-line */
+                <img
+                  className="rounded-md w-full object-cover h-[60lvh]"
                   src={data.service.imageUrl}
                   alt={data.service.name}
                   width={200}

@@ -113,7 +113,8 @@ const OrgMemberItems = () => {
               <TableCell className="font-medium">{index + 1}</TableCell>
             <TableCell>
             {
-              member.avatarUrl && <Image src={member.avatarUrl} alt="avatar" width={40} height={40} className="rounded-full"/>
+              /* eslint-disable-next-line */
+              member.avatarUrl && <img src={member.avatarUrl} alt="avatar" width={40} height={40} className="rounded-full"/>
             }
             {
               !member.avatarUrl && <Image src="/user.png" alt="avatar" width={40} height={40} className="rounded-full"/>
